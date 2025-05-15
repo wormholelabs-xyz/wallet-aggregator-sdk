@@ -17,14 +17,16 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
     "prettier": "2.8.4",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "tsx": "^4.19.0"
   },
   "scripts": {
     "build": "tsc --build --verbose tsconfig.all.json",
     "clean": "pnpm -r run clean",
     "lint": "npx eslint .",
     "prepare": "husky install",
-    "prettier": "prettier --write --ignore-unknown **/*"
+    "prettier": "prettier --write --ignore-unknown **/*",
+    "version": "tsx scripts/version.ts"
   },
   "pnpm": {
     "overrides": {
