@@ -14,7 +14,7 @@ import {
   Address,
   NotSupported,
   SendTransactionResult,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import { BN } from "bn.js";
 import {
   Account as ConnectedAccount,
@@ -43,7 +43,7 @@ export interface NearModalSelectorWalletParams {
  * to select between them.
  *
  * ```ts
- * import { wrapWallet } from "@xlabs-libs/wallet-aggregator-near";
+ * import { wrapWallet } from "@wormhole-labs/wallet-aggregator-near";
  * import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
  *
  *

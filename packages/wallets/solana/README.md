@@ -15,7 +15,7 @@ import { clusterApiUrl } from "@solana/web3.js";
 import {
   getSolanaStandardWallets,
   SolanaWallet,
-} from "@xlabs-libs/wallet-aggregator-solana";
+} from "@wormhole-labs/wallet-aggregator-solana";
 
 const cluster = "mainnet";
 const url = clusterApiUrl("mainnet-beta");

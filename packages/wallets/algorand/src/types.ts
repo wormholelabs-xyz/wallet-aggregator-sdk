@@ -1,4 +1,4 @@
-import { BaseFeatures } from "@xlabs-libs/wallet-aggregator-core";
+import { BaseFeatures } from "@wormhole-labs/wallet-aggregator-core";
 
 export interface AccountDataResponse {
   account: {

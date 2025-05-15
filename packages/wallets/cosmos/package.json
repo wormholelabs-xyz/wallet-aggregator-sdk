@@ -1,6 +1,6 @@
 {
-  "name": "@xlabs-libs/wallet-aggregator-cosmos",
-  "repository": "https://github.com/XLabs/wallet-aggregator-sdk/tree/master/packages/wallets/cosmos",
+  "name": "@wormhole-labs/wallet-aggregator-cosmos",
+  "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/cosmos",
   "version": "0.0.1-alpha.16",
   "license": "MIT",
   "main": "dist/cjs/index.js",
@@ -31,6 +31,6 @@
     "typescript": "^5.3.2"
   },
   "dependencies": {
-    "@xlabs-libs/wallet-aggregator-core": "workspace:^"
+    "@wormhole-labs/wallet-aggregator-core": "workspace:^"
   }
 }

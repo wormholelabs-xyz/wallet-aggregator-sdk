@@ -1,6 +1,6 @@
 {
-  "name": "@xlabs-libs/wallet-aggregator-terra",
-  "repository": "https://github.com/XLabs/wallet-aggregator-sdk/tree/master/packages/wallets/terra",
+  "name": "@wormhole-labs/wallet-aggregator-terra",
+  "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/terra",
   "version": "0.0.1-alpha.7",
   "sideEffects": false,
   "license": "MIT",
@@ -32,7 +32,7 @@
   "dependencies": {
     "@terra-money/terra.js": "^3.1.7",
     "@terra-money/wallet-provider": "^3.11.2",
-    "@xlabs-libs/wallet-aggregator-core": "workspace:^",
+    "@wormhole-labs/wallet-aggregator-core": "workspace:^",
     "rxjs": "^7.5.7"
   }
 }

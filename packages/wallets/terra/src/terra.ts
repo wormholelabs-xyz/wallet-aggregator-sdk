@@ -22,7 +22,7 @@ import {
   WalletState,
   BaseFeatures,
   isTerraChain,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import { Observable, Subscription } from "rxjs";
 import { map, timeout } from "rxjs/operators";
 

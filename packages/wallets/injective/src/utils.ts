@@ -6,7 +6,7 @@ import {
   getNetworkEndpoints,
   Network as NetworkInj,
 } from "@injectivelabs/networks";
-import { Network } from "@xlabs-libs/wallet-aggregator-core";
+import { Network } from "@wormhole-labs/wallet-aggregator-core";
 
 export const getTx = async (
   hash: string,

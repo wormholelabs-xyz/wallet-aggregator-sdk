@@ -32,7 +32,7 @@ import {
   CoinbaseWallet,
   LedgerWallet,
   InjectedWallet,
-} from "@xlabs-libs/wallet-aggregator-evm";
+} from "@wormhole-labs/wallet-aggregator-evm";
 
 const injected = new InjectedWallet();
 const metamask = new MetamaskWallet({

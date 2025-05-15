@@ -15,7 +15,7 @@ import {
   Address,
   NotSupported,
   SendTransactionResult,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import { ConnectConfig as NearConfig } from "near-api-js";
 import {
   NearTransactionParams,
@@ -91,7 +91,7 @@ export const wrapWallet = async ({
  * to configure it and iteract with it.
  *
  * ```ts
- * import { wrapWallet } from "@xlabs-libs/wallet-aggregator-near";
+ * import { wrapWallet } from "@wormhole-labs/wallet-aggregator-near";
  * import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
  *
  * const factory = await setupMeteorWallet();

@@ -1,6 +1,6 @@
 import { InjectedConnector } from "@wagmi/core";
 import { EVMWallet } from "./evm";
-import { WalletState } from "@xlabs-libs/wallet-aggregator-core";
+import { WalletState } from "@wormhole-labs/wallet-aggregator-core";
 
 type ProviderDetail = {
   info: {

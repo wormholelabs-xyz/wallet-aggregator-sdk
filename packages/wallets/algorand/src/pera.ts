@@ -4,7 +4,7 @@ import {
   BaseFeatures,
   NotConnected,
   NotSupported,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import algosdk from "algosdk";
 import { AlgorandWallet } from "./algorand";
 import {

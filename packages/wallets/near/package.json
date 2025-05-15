@@ -1,6 +1,6 @@
 {
-  "name": "@xlabs-libs/wallet-aggregator-near",
-  "repository": "https://github.com/XLabs/wallet-aggregator-sdk/tree/master/packages/wallets/near",
+  "name": "@wormhole-labs/wallet-aggregator-near",
+  "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/near",
   "version": "0.0.1-alpha.7",
   "sideEffects": false,
   "license": "MIT",
@@ -33,7 +33,7 @@
   "dependencies": {
     "@near-wallet-selector/core": "^7.6.1",
     "@near-wallet-selector/modal-ui": "^7.6.1",
-    "@xlabs-libs/wallet-aggregator-core": "workspace:^",
+    "@wormhole-labs/wallet-aggregator-core": "workspace:^",
     "bn.js": "^5.2.1",
     "near-api-js": "^1.1.0",
     "rxjs": "^7.5.7"

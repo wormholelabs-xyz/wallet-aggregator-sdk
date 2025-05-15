@@ -1,4 +1,8 @@
-import { ChainId, CHAINS, Network } from "@xlabs-libs/wallet-aggregator-core";
+import {
+  ChainId,
+  CHAINS,
+  Network,
+} from "@wormhole-labs/wallet-aggregator-core";
 
 export const EVM_CHAINS = {
   ethereum: 1,

@@ -11,7 +11,7 @@ For now, the only supported types are Keplr and Cosmostation.
 ```ts
 import { ChainId as InjectiveChainId } from "@injectivelabs/ts-types";
 import { getNetworkInfo, Network } from "@injectivelabs/networks";
-import { InjectiveWallet } from "@xlabs-libs/wallet-aggregator-injective";
+import { InjectiveWallet } from "@wormhole-labs/wallet-aggregator-injective";
 
 const network = InjectiveChainId.Mainnet;
 const networkInfo = getNetworkInfo(Network.MainnetK8s);

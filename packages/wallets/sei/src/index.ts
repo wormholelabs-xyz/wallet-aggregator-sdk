@@ -22,7 +22,7 @@ import {
   SendTransactionResult,
   Wallet,
   WalletState,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import { WALLETS } from "./wallets";
 
 export type SeiChainId = "pacific-1" | "atlantic-2" | "sei-devnet-3";

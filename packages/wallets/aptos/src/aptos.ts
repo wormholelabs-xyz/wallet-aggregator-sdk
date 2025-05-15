@@ -31,7 +31,7 @@ import {
   SendTransactionResult,
   Wallet,
   WalletState,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 
 import type { Types as AptosLegacyTypes } from "aptos";
 

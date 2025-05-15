@@ -20,7 +20,7 @@ import {
   WalletEvents,
   WalletState,
   isEVMChain,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import { ethers, TransactionReceipt, TransactionRequest } from "ethers";
 import { Chain, DEFAULT_CHAINS } from "./chains";
 import { evmChainIdToChainId, isTestnetEvm } from "./constants";

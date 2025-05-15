@@ -27,7 +27,7 @@ import {
   SendTransactionResult,
   Wallet,
   WalletEvents,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import { DEFAULTS, SuiWalletName, WalletInfo } from "./walletsInfo";
 
 export enum FeatureName {

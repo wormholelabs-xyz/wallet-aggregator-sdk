@@ -12,7 +12,7 @@ import {
   SendTransactionResult,
   Wallet,
   BaseFeatures,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import {
   BroadcasterOptions,
   InjectiveEIP712Message,

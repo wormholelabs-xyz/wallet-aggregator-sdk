@@ -1,7 +1,7 @@
 import { DeflyWalletConnect } from "@blockshake/defly-connect";
 import { AlgorandWallet } from "./algorand";
 import algosdk from "algosdk";
-import { Address, NotSupported } from "@xlabs-libs/wallet-aggregator-core";
+import { Address, NotSupported } from "@wormhole-labs/wallet-aggregator-core";
 import {
   AlgorandWalletParams,
   AlgorandWalletType,

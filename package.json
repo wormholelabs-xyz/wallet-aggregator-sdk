@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "@xlabs-libs/wallet-aggregator-sdk",
-  "repository": "https://github.com/xlabs/wallet-aggregator-sdk",
+  "name": "@wormhole-labs/wallet-aggregator-sdk",
+  "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=16",

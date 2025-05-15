@@ -4,7 +4,10 @@ import WebUSBTransport from "@ledgerhq/hw-transport-webusb";
 import WebHIDTransport from "@ledgerhq/hw-transport-webhid";
 import WebBLETransport from "@ledgerhq/hw-transport-web-ble";
 import Algorand from "@ledgerhq/hw-app-algorand";
-import { NotSupported, WalletState } from "@xlabs-libs/wallet-aggregator-core";
+import {
+  NotSupported,
+  WalletState,
+} from "@wormhole-labs/wallet-aggregator-core";
 import algosdk from "algosdk";
 import {
   AlgorandWalletParams,

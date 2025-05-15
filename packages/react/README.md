@@ -15,13 +15,13 @@ import {
   CHAIN_ID_ALGORAND,
   CHAIN_ID_ETH,
   CHAIN_ID_SOME_CHAIN,
-} from "@xlabs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import {
   MetamaskWallet,
   WalletConnectWallet,
-} from "@xlabs/wallet-aggregator-algorand";
-import { SomeWallet } from "@xlabs/wallet-aggregator-some-chain";
-import { WalletContextProvider } from "@xlabs/wallet-aggregator-react";
+} from "@wormhole-labs/wallet-aggregator-algorand";
+import { SomeWallet } from "@wormhole-labs/wallet-aggregator-some-chain";
+import { WalletContextProvider } from "@wormhole-labs/wallet-aggregator-react";
 
 type AvailableWalletsMap = Partial<Record<ChainId, Wallet[]>>;
 
@@ -45,13 +45,13 @@ import {
   CHAIN_ID_ALGORAND,
   CHAIN_ID_ETH,
   CHAIN_ID_SOME_CHAIN,
-} from "@xlabs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import {
   MetamaskWallet,
   WalletConnectWallet,
-} from "@xlabs/wallet-aggregator-algorand";
-import { SomeWallet } from "@xlabs/wallet-aggregator-some-chain";
-import { WalletContextProvider } from "@xlabs/wallet-aggregator-react";
+} from "@wormhole-labs/wallet-aggregator-algorand";
+import { SomeWallet } from "@wormhole-labs/wallet-aggregator-some-chain";
+import { WalletContextProvider } from "@wormhole-labs/wallet-aggregator-react";
 
 type AvailableWalletsMap = Partial<Record<ChainId, Wallet[]>>;
 

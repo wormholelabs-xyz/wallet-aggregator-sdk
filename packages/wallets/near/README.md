@@ -9,7 +9,7 @@ There are two methods of using this package. You may either use the `NearModalSe
 #### Using the NearModalSelectorWallet
 
 ```ts
-import { NearModalSelectorWallet } from "@xlabs-libs/wallet-aggregator-near";
+import { NearModalSelectorWallet } from "@wormhole-labs/wallet-aggregator-near";
 import { setupDefaultWallets } from "@near-wallet-selector/default-wallets";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupNightly } from "@near-wallet-selector/nightly";

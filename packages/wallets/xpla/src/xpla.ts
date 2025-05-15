@@ -6,7 +6,7 @@ import {
   Wallet,
   WalletState,
   BaseFeatures,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import {
   Connection,
   ConnectType,

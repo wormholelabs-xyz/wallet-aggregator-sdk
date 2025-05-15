@@ -1,5 +1,5 @@
 import { Wallet as WalletType } from "@injectivelabs/wallet-ts";
-import { WalletState } from "@xlabs-libs/wallet-aggregator-core";
+import { WalletState } from "@wormhole-labs/wallet-aggregator-core";
 import { InjectiveWallet } from "./injective";
 import { ConcreteWalletConfig } from "./types";
 

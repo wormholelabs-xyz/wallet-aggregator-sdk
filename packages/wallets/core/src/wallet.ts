@@ -107,7 +107,7 @@ export abstract class Wallet<
 
   /**
    * @description Retrieve the wallet's blockchain's wormhole chain id
-   * @see The {@link https://github.com/XLabs/wallet-aggregator-sdk/blob/e00efc8aba5fcea1f65b54bf8953a405bdeaf52b/packages/wallets/core/src/constants.ts constants} file for a detailed map of the available chains
+   * @see The {@link https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/blob/e00efc8aba5fcea1f65b54bf8953a405bdeaf52b/packages/wallets/core/src/constants.ts constants} file for a detailed map of the available chains
    */
   abstract getChainId(): CID;
 

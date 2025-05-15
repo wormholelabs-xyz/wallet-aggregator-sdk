@@ -1,6 +1,6 @@
 {
-  "name": "@xlabs-libs/wallet-aggregator-xpla",
-  "repository": "https://github.com/XLabs/wallet-aggregator-sdk/tree/master/packages/wallets/xpla",
+  "name": "@wormhole-labs/wallet-aggregator-xpla",
+  "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/xpla",
   "version": "0.0.1-alpha.7",
   "sideEffects": false,
   "license": "MIT",
@@ -30,7 +30,7 @@
     "typescript": "^5.3.2"
   },
   "dependencies": {
-    "@xlabs-libs/wallet-aggregator-core": "workspace:^",
+    "@wormhole-labs/wallet-aggregator-core": "workspace:^",
     "@xpla/wallet-provider": "^0.3.10",
     "@xpla/xpla.js": "^0.2.1",
     "rxjs": "^7.5.7"

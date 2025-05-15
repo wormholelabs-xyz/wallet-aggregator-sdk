@@ -11,7 +11,7 @@ import { ConnectType } from "@xpla-money/wallet-provider";
 import {
   getWallets as getXplaWallets,
   XplaWallet,
-} from "@xlabs-libs/wallet-aggregator-xpla";
+} from "@wormhole-labs/wallet-aggregator-xpla";
 
 const ignoredTypes = [ConnectType.READONLY];
 const wallets: XplaWallet[] = await getXplaWallets(ignoredTypes);

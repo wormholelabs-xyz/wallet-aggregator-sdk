@@ -17,7 +17,7 @@ The base Algorand wallet configuration allows setting the algorand node and inde
 Example:
 
 ```ts
-import { PeraWallet } from "@xlabs-libs/wallet-aggregator-algorand";
+import { PeraWallet } from "@wormhole-labs/wallet-aggregator-algorand";
 
 const pera = new PeraWallet({
   node: {

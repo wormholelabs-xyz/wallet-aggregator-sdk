@@ -13,7 +13,7 @@ import {
   Signature,
   Wallet,
   WalletState,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 
 export interface SolanaAdapter extends WalletAdapter {
   signTransaction?<T extends Transaction>(transaction: T): Promise<T>;

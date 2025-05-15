@@ -1,14 +1,14 @@
 // import {
 //   NotConnected,
 //   SendTransactionResult,
-// } from "@xlabs-libs/wallet-aggregator-core";
+// } from "@wormhole-labs/wallet-aggregator-core";
 // import Long from "long";
 // import {
 //   CosmosWallet,
 //   CosmosTransaction,
 //   CosmosWalletConfig,
 //   TxRaw,
-// } from "@xlabs-libs/wallet-aggregator-cosmos";
+// } from "@wormhole-labs/wallet-aggregator-cosmos";
 // import { proto } from "evmosjs";
 import { EncodeObject } from "@cosmjs/proto-signing";
 import { DeliverTxResponse, SigningStargateClient } from "@cosmjs/stargate";
@@ -22,7 +22,7 @@ import {
 import {
   NotConnected,
   SendTransactionResult,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import {
   AccountResponse,
   CosmosTransaction,
@@ -30,7 +30,7 @@ import {
   CosmosWalletConfig,
   ExtensionWallet,
   TxRaw,
-} from "@xlabs-libs/wallet-aggregator-cosmos";
+} from "@wormhole-labs/wallet-aggregator-cosmos";
 import { MsgSend as CosmosMsgSend } from "cosmjs-types/cosmos/bank/v1beta1/tx";
 import { MsgTransfer as CosmosMsgTransfer } from "cosmjs-types/ibc/applications/transfer/v1/tx";
 import { MsgExecuteContract as CosmosMsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";

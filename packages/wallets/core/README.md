@@ -17,7 +17,7 @@ New events can be added by extending the `WalletEvents` class.
 Example:
 
 ```ts
-import { Wallet, WalletEvents } from "@xlabs/wallet-aggregator-core";
+import { Wallet, WalletEvents } from "@wormhole-labs/wallet-aggregator-core";
 
 // define types
 type MyUnsignedTransactionType = // ...

@@ -1,4 +1,4 @@
-import { ChainId, Wallet } from "@xlabs-libs/wallet-aggregator-core";
+import { ChainId, Wallet } from "@wormhole-labs/wallet-aggregator-core";
 import { useCallback, useMemo } from "react";
 import { AvailableWalletsMap, useWalletContext } from "./WalletContext";
 

@@ -1,6 +1,6 @@
 {
-  "name": "@xlabs-libs/wallet-aggregator-core",
-  "repository": "https://github.com/XLabs/wallet-aggregator-sdk/tree/master/packages/wallets/core",
+  "name": "@wormhole-labs/wallet-aggregator-core",
+  "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/core",
   "version": "0.0.1-alpha.23",
   "license": "MIT",
   "main": "dist/cjs/index.js",

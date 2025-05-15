@@ -5,7 +5,7 @@ import {
   isEVMChain,
   isTerraChain,
   Wallet,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import React, {
   createContext,
   useCallback,

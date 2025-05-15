@@ -3,7 +3,7 @@ import {
   ChainId,
   CHAINS,
   Network,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 
 export const COSMOS_CHAINS = {
   wormchain: "wormchain",

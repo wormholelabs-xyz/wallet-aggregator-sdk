@@ -11,7 +11,7 @@ import { ConnectType } from "@terra-money/wallet-provider";
 import {
   getWallets as getTerraWallets,
   TerraWallet,
-} from "@xlabs-libs/wallet-aggregator-terra";
+} from "@wormhole-labs/wallet-aggregator-terra";
 
 const ignoredTypes = [ConnectType.READONLY];
 const wallets: TerraWallet[] = await getTerraWallets(ignoredTypes);

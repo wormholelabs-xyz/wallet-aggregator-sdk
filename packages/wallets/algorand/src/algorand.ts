@@ -6,7 +6,7 @@ import {
   SendTransactionResult,
   Signature,
   Wallet,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import algosdk from "algosdk";
 import {
   AccountDataResponse,

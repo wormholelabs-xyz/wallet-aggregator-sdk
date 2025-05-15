@@ -38,7 +38,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../wallets/core
     devDependencies:
@@ -93,7 +93,7 @@ importers:
       '@perawallet/connect':
         specifier: ^1.3.3
         version: 1.3.3(algosdk@1.24.0)(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
       algosdk:
@@ -139,7 +139,7 @@ importers:
       '@pontem/wallet-adapter-plugin':
         specifier: ^0.2.1
         version: 0.2.1
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
       fewcha-plugin-wallet-adapter:
@@ -180,7 +180,7 @@ importers:
 
   packages/wallets/cosmos:
     dependencies:
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
     devDependencies:
@@ -223,10 +223,10 @@ importers:
       '@injectivelabs/sdk-ts':
         specifier: 1.14.0-beta.1
         version: 1.14.0-beta.1(bufferutil@4.0.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(utf-8-validate@5.0.10)
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
-      '@xlabs-libs/wallet-aggregator-cosmos':
+      '@wormhole-labs/wallet-aggregator-cosmos':
         specifier: workspace:^
         version: link:../cosmos
     devDependencies:
@@ -281,7 +281,7 @@ importers:
       '@walletconnect/modal':
         specifier: ^2.7.0
         version: 2.7.0(@types/react@17.0.52)(react@18.2.0)
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
       ethers:
@@ -317,14 +317,14 @@ importers:
         version: 1.14.6(google-protobuf@3.21.2)
       '@injectivelabs/sdk-ts':
         specifier: 1.14.7
-        version: 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
+        version: 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)(utf-8-validate@5.0.10)
       '@injectivelabs/ts-types':
         specifier: 1.14.4
         version: 1.14.4
       '@injectivelabs/wallet-ts':
         specifier: 1.14.4
-        version: 1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
-      '@xlabs-libs/wallet-aggregator-core':
+        version: 1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
     devDependencies:
@@ -352,7 +352,7 @@ importers:
       '@near-wallet-selector/modal-ui':
         specifier: ^7.6.1
         version: 7.6.1(near-api-js@1.1.0)
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
       bn.js:
@@ -383,7 +383,7 @@ importers:
       '@sei-js/core':
         specifier: ^3.1.0
         version: 3.1.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
     devDependencies:
@@ -423,7 +423,7 @@ importers:
       '@wallet-standard/app':
         specifier: ^1.0.1
         version: 1.0.1
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
     devDependencies:
@@ -454,7 +454,7 @@ importers:
       '@mysten/wallet-standard':
         specifier: ^0.5.4
         version: 0.5.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
     devDependencies:
@@ -479,7 +479,7 @@ importers:
       '@terra-money/wallet-provider':
         specifier: ^3.11.2
         version: 3.11.2(@terra-money/terra.js@3.1.7)(bufferutil@4.0.7)(react@18.2.0)(utf-8-validate@5.0.10)
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
       rxjs:
@@ -498,7 +498,7 @@ importers:
 
   packages/wallets/xpla:
     dependencies:
-      '@xlabs-libs/wallet-aggregator-core':
+      '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
       '@xpla/wallet-provider':
@@ -671,7 +671,6 @@ packages:
 
   '@confio/ics23@0.6.8':
     resolution: {integrity: sha512-wB6uo+3A50m0sW/EWcU64xpV/8wShZ6bMTa7pF8eYsTrSkQA7oLUIJcs/wb8g4y2Oyq701BaGiO6n/ak5WXO1w==}
-    deprecated: Unmaintained. The codebase for this package was moved to https://github.com/cosmos/ics23 but then the JS implementation was removed in https://github.com/cosmos/ics23/pull/353. Please consult the maintainers of https://github.com/cosmos for further assistance.
 
   '@cosmjs/amino@0.27.1':
     resolution: {integrity: sha512-w56ar/nK9+qlvWDpBPRmD0Blk2wfkkLqRi1COs1x7Ll1LF0AtkIBUjbRKplENLbNovK0T3h+w8bHiFm+GBGQOA==}
@@ -2565,9 +2564,11 @@ packages:
 
   '@walletconnect/modal@2.6.2':
     resolution: {integrity: sha512-eFopgKi8AjKf/0U4SemvcYw9zlLpx9njVN8sf6DAkowC2Md0gPU/UNEbH1Wwj407pEKnEds98pKWib1NN1ACoA==}
+    deprecated: Please follow the migration guide on https://docs.reown.com/appkit/upgrade/wcm
 
   '@walletconnect/modal@2.7.0':
     resolution: {integrity: sha512-RQVt58oJ+rwqnPcIvRFeMGKuXb9qkgSmwz4noF8JZGUym3gUAzVs+uW2NQ1Owm9XOJAV+sANrtJ+VoVq1ftElw==}
+    deprecated: Please follow the migration guide on https://docs.reown.com/appkit/upgrade/wcm
 
   '@walletconnect/qrcode-modal@1.8.0':
     resolution: {integrity: sha512-BueaFefaAi8mawE45eUtztg3ZFbsAH4DDXh1UNwdUlsvFMjqcYzLUG0xZvDd6z2eOpbgDg2N3bl6gF0KONj1dg==}
@@ -2596,11 +2597,11 @@ packages:
 
   '@walletconnect/sign-client@2.0.0-rc.3':
     resolution: {integrity: sha512-M/+tmccQvNIM86CJ3RsQBZVaECSq8jH1CEj1iUDmhxuG0eEg3Zesf5yJMg41aFFNVi2vSdBCeP0zcqWCDChf/g==}
-    deprecated: 'Reliability and performance improvements. See: https://github.com/WalletConnect/walletconnect-monorepo/releases'
+    deprecated: Reliability and performance greatly improved - please see https://github.com/WalletConnect/walletconnect-monorepo/releases
 
   '@walletconnect/sign-client@2.11.0':
     resolution: {integrity: sha512-H2ukscibBS+6WrzQWh+WyVBqO5z4F5et12JcwobdwgHnJSlqIoZxqnUYYWNCI5rUR5UKsKWaUyto4AE9N5dw4Q==}
-    deprecated: 'Reliability and performance improvements. See: https://github.com/WalletConnect/walletconnect-monorepo/releases'
+    deprecated: Reliability and performance greatly improved - please see https://github.com/WalletConnect/walletconnect-monorepo/releases
 
   '@walletconnect/socket-transport@1.8.0':
     resolution: {integrity: sha512-5DyIyWrzHXTcVp0Vd93zJ5XMW61iDM6bcWT4p8DTRfFsOtW46JquruMhxOLeCOieM4D73kcr3U7WtyR4JUsGuQ==}
@@ -4202,7 +4203,6 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
-    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -5692,7 +5692,7 @@ snapshots:
 
   '@apocentre/alias-sampling@0.5.3': {}
 
-  '@apollo/client@3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
+  '@apollo/client@3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@graphql-typed-document-node/core': 3.1.1(graphql@16.6.0)
       '@wry/context': 0.7.0
@@ -5709,7 +5709,7 @@ snapshots:
       tslib: 2.5.0
       zen-observable-ts: 1.2.5
     optionalDependencies:
-      react: 16.13.1
+      react: 18.2.0
       react-dom: 16.13.1(react@16.13.1)
 
   '@apollo/client@3.7.1(graphql@16.6.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
@@ -6762,14 +6762,14 @@ snapshots:
       - encoding
       - utf-8-validate
 
-  '@fractalwagmi/popup-connection@1.0.18(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
+  '@fractalwagmi/popup-connection@1.0.18(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
     dependencies:
-      react: 16.13.1
+      react: 18.2.0
       react-dom: 16.13.1(react@16.13.1)
 
-  '@fractalwagmi/solana-wallet-adapter@0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
+  '@fractalwagmi/solana-wallet-adapter@0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@fractalwagmi/popup-connection': 1.0.18(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
+      '@fractalwagmi/popup-connection': 1.0.18(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       bs58: 5.0.0
     transitivePeerDependencies:
@@ -7025,9 +7025,9 @@ snapshots:
       - subscriptions-transport-ws
       - utf-8-validate
 
-  '@injectivelabs/sdk-ts@1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)':
+  '@injectivelabs/sdk-ts@1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)(utf-8-validate@5.0.10)':
     dependencies:
-      '@apollo/client': 3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
+      '@apollo/client': 3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
       '@cosmjs/amino': 0.32.4
       '@cosmjs/proto-signing': 0.32.4
       '@cosmjs/stargate': 0.32.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
@@ -7189,7 +7189,7 @@ snapshots:
       - debug
       - google-protobuf
 
-  '@injectivelabs/wallet-ts@1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)':
+  '@injectivelabs/wallet-ts@1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)':
     dependencies:
       '@cosmjs/launchpad': 0.27.1
       '@cosmjs/proto-signing': 0.30.1
@@ -7199,7 +7199,7 @@ snapshots:
       '@ethereumjs/tx': 4.1.2
       '@injectivelabs/exceptions': 1.14.4(google-protobuf@3.21.2)
       '@injectivelabs/networks': 1.14.6(google-protobuf@3.21.2)
-      '@injectivelabs/sdk-ts': 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
+      '@injectivelabs/sdk-ts': 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)(utf-8-validate@5.0.10)
       '@injectivelabs/ts-types': 1.14.4
       '@injectivelabs/utils': 1.14.4(google-protobuf@3.21.2)
       '@keplr-wallet/cosmos': 0.11.59
@@ -7209,7 +7209,7 @@ snapshots:
       '@ledgerhq/hw-transport-webhid': 6.27.14
       '@ledgerhq/hw-transport-webusb': 6.27.14
       '@metamask/eth-sig-util': 4.0.1
-      '@solana/wallet-adapter-wallets': 0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
+      '@solana/wallet-adapter-wallets': 0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)
       '@toruslabs/torus-embed': 1.41.2(@babel/runtime@7.20.13)
       '@trezor/connect-web': 9.0.8(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       alchemy-sdk: 2.8.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
@@ -8253,9 +8253,9 @@ snapshots:
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/web3.js': 1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10)
 
-  '@solana/wallet-adapter-fractal@0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
+  '@solana/wallet-adapter-fractal@0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@fractalwagmi/solana-wallet-adapter': 0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
+      '@fractalwagmi/solana-wallet-adapter': 0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/web3.js': 1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
@@ -8451,7 +8451,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@solana/wallet-adapter-wallets@0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)':
+  '@solana/wallet-adapter-wallets@0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)':
     dependencies:
       '@solana/wallet-adapter-alpha': 0.1.7(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-avana': 0.1.10(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
@@ -8466,7 +8466,7 @@ snapshots:
       '@solana/wallet-adapter-coinbase': 0.1.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-coinhub': 0.3.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-exodus': 0.1.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
-      '@solana/wallet-adapter-fractal': 0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
+      '@solana/wallet-adapter-fractal': 0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
       '@solana/wallet-adapter-glow': 0.1.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-huobi': 0.1.12(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-hyperpay': 0.1.11(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
@@ -8775,7 +8775,7 @@ snapshots:
       fast-deep-equal: 3.1.3
       jscrypto: 1.0.3
       mobile-detect: 1.4.5
-      qrcode: 1.5.1
+      qrcode: 1.5.3
       rxjs: 7.8.0
       secp256k1: 4.0.3
       ws: 7.5.9(bufferutil@4.0.7)(utf-8-validate@5.0.10)
@@ -9997,7 +9997,7 @@ snapshots:
       fast-deep-equal: 3.1.3
       jscrypto: 1.0.3
       mobile-detect: 1.4.5
-      qrcode: 1.5.1
+      qrcode: 1.5.3
       rxjs: 7.8.0
       secp256k1: 4.0.3
       ws: 7.5.9(bufferutil@4.0.7)(utf-8-validate@5.0.10)

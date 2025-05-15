@@ -25,7 +25,7 @@ import {
   Wallet,
   WalletState,
   isCosmWasmChain,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {
   CosmosConnectOptions,
@@ -319,7 +319,9 @@ export class CosmosWallet extends Wallet<
     // from cosmjs: https://github.com/cosmos/cosmjs/blob/358260bff71c9d3e7ad6644fcf64dc00325cdfb9/packages/stargate/src/stargateclient.ts#L218
     let tmClient: TendermintClient;
     const tm37Client = await Tendermint37Client.connect(rpc);
-    const [_major, minor, _patch] = (await tm37Client.status()).nodeInfo.version.split('.');
+    const [_major, minor, _patch] = (
+      await tm37Client.status()
+    ).nodeInfo.version.split(".");
     if (parseInt(minor, 10) >= 37) {
       tmClient = tm37Client;
     } else {

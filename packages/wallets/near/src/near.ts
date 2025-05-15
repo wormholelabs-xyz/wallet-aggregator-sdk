@@ -11,7 +11,7 @@ import {
   SendTransactionResult,
   Wallet,
   BaseFeatures,
-} from "@xlabs-libs/wallet-aggregator-core";
+} from "@wormhole-labs/wallet-aggregator-core";
 
 export interface NearTransaction {
   signerId?: string;

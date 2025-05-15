@@ -1,6 +1,6 @@
 {
-  "name": "@xlabs-libs/wallet-aggregator-evm",
-  "repository": "https://github.com/XLabs/wallet-aggregator-sdk/tree/master/packages/wallets/evm",
+  "name": "@wormhole-labs/wallet-aggregator-evm",
+  "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/evm",
   "version": "0.0.2-alpha.8",
   "license": "MIT",
   "main": "dist/cjs/index.js",
@@ -32,7 +32,7 @@
   "dependencies": {
     "@wagmi/core": "^1.4.13",
     "@walletconnect/modal": "^2.7.0",
-    "@xlabs-libs/wallet-aggregator-core": "workspace:^",
+    "@wormhole-labs/wallet-aggregator-core": "workspace:^",
     "ethers": "^6.4.2",
     "versions": "^10.4.1",
     "viem": "^1.20.3"

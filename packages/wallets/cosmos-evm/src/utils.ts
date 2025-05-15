@@ -3,7 +3,7 @@ import {
   MsgSend,
   MsgTransfer,
 } from "@injectivelabs/sdk-ts";
-import { ResourceMap, WALLETS } from "@xlabs-libs/wallet-aggregator-cosmos";
+import { ResourceMap, WALLETS } from "@wormhole-labs/wallet-aggregator-cosmos";
 import { MsgSend as CosmosMsgSend } from "cosmjs-types/cosmos/bank/v1beta1/tx";
 import { MsgTransfer as CosmosMsgTransfer } from "cosmjs-types/ibc/applications/transfer/v1/tx";
 import { MsgExecuteContract as CosmosMsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";
