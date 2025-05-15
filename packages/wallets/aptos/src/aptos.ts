@@ -1,28 +1,22 @@
-import { AccountAuthenticator, Network } from "@aptos-labs/ts-sdk";
-
 import {
-  WalletName,
-  NetworkInfo,
-  SignMessagePayload,
-  SignMessageResponse,
-  WalletCore,
-  AnyAptosWallet,
+  AccountAuthenticator,
+  Network,
   AnyRawTransaction,
-  InputTransactionData,
-  Wallet as IAptosWallet,
+  InputSubmitTransactionData,
+} from "@aptos-labs/ts-sdk";
+import {
+  WalletCore,
+  AdapterWallet,
   DappConfig,
+  InputTransactionData,
 } from "@aptos-labs/wallet-adapter-core";
-
-import { BitgetWallet } from "@bitget-wallet/aptos-wallet-adapter";
-import { MartianWallet } from "@martianwallet/aptos-wallet-adapter";
-import { PontemWallet } from "@pontem/wallet-adapter-plugin";
-import { FewchaWallet } from "fewcha-plugin-wallet-adapter";
-import { PetraWallet } from "petra-plugin-wallet-adapter";
-// FIXME: These wallets are not working
-// import { OKXWallet } from "@okwallet/aptos-wallet-adapter";
-// import { MSafeWalletAdapter } from "@msafe/aptos-wallet-adapter";
-// import { TrustWallet } from "@trustwallet/aptos-wallet-adapter";
-
+import type {
+  NetworkInfo,
+  AccountInfo,
+  AptosSignMessageInput,
+  AptosSignMessageOutput,
+} from "@aptos-labs/wallet-standard";
+import { WalletReadyState } from "@aptos-labs/wallet-adapter-core/dist/constants";
 import {
   BaseFeatures,
   CHAIN_ID_APTOS,
@@ -39,12 +33,12 @@ export interface AptosSubmitResult {
   hash: AptosLegacyTypes.HexEncodedBytes;
 }
 
-export type AptosMessage = string | SignMessagePayload | Uint8Array;
-export type SignedAptosMessage = string | SignMessageResponse;
+export type AptosMessage = string | AptosSignMessageInput | Uint8Array;
+export type SignedAptosMessage = string | AptosSignMessageOutput;
 
 type AdapterIcon = {
-  icon: AnyAptosWallet["icon"];
-  name?: WalletName;
+  icon: AdapterWallet["icon"];
+  name?: AdapterWallet["name"];
 };
 
 const NIGHTLY_WALLET: AdapterIcon = {
@@ -57,10 +51,10 @@ const SNAP_WALLET: AdapterIcon = {
 
 const BITGET_WALLET: AdapterIcon = {
   icon: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgdmlld0JveD0iMCAwIDI1NiAyNTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF8yMDM1XzExMDYpIj4KPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9IiM1NEZGRjUiLz4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZl8yMDM1XzExMDYpIj4KPHBhdGggZD0iTTEzLjQ4MDYgMTk4LjYwNUMtMjkuMzI3NiAzMTkuMDQzIDE5OS42NjEgMjg1LjAyNyAzMTkuNTA3IDI1Mi45NjRDNDQyLjE2NSAyMTIuMjU5IDM1Ny4zODYgMzIuODI2OSAyNjkuNDE1IDI4Ljg1NThDMTgxLjQ0MyAyNC44ODQ3IDI4MC4zMjIgMTExLjgyNCAyMDUuNTk1IDEzNi42NTZDMTMwLjg2OCAxNjEuNDg3IDY2Ljk5MDcgNDguMDU4MyAxMy40ODA2IDE5OC42MDVaIiBmaWxsPSJ3aGl0ZSIvPgo8L2c+CjxnIGZpbHRlcj0idXJsKCNmaWx0ZXIxX2ZfMjAzNV8xMTA2KSI+CjxwYXRoIGQ9Ik04NS41MTE4IC00NS44MjI1QzYzLjA1NjIgLTEwNy4xNzYgLTE2LjkxODkgLTIzLjk5NTMgLTU0LjA5OTUgMjUuMjY0M0MtODkuNTY1MiA3OC44NDc5IDMuMDA5MzcgMTI1LjE1MiAzOS4zMjA4IDEwMC4wMzdDNzUuNjMyMyA3NC45MjI3IDcuNzc0NDggNzAuMDM2MyAyOS4zNzA4IDM3LjM3ODVDNTAuOTY3MSA0LjcyMDc2IDExMy41ODEgMzAuODY5NSA4NS41MTE4IC00NS44MjI1WiIgZmlsbD0iIzAwRkZGMCIgZmlsbC1vcGFjaXR5PSIwLjY3Ii8+CjwvZz4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjJfZl8yMDM1XzExMDYpIj4KPHBhdGggZD0iTTk2LjQ3OTYgMjI1LjQyNEM2NS44NTAyIDEyMi4zNjMgLTY2LjA4MTggMTc2LjYzNyAtMTI4LjIxOSAyMTYuNjU3Qy0xODcuOTkgMjY0LjA0MiAtNDYuMDcxMSA0MDAuMzQ4IDEyLjg3MjUgMzkzLjM3NkM3MS44MTYxIDM4Ni40MDMgLTM0LjQxMTggMzI3LjA2NSAxLjk4NzAyIDI5OC4xN0MzOC4zODU4IDI2OS4yNzYgMTM0Ljc2NiAzNTQuMjQ5IDk2LjQ3OTYgMjI1LjQyNFoiIGZpbGw9IiM5RDgxRkYiLz4KPC9nPgo8ZyBmaWx0ZXI9InVybCgjZmlsdGVyM19mXzIwMzVfMTEwNikiPgo8cGF0aCBkPSJNMjgyLjEyIC0xMDcuMzUzQzIxNi4wNDcgLTE4Ni4wMzEgMTIxLjQ2MyAtMTIwLjk3IDgyLjQyOTYgLTc4LjYwNDdDNDguMjczOSAtMzAuNjQ0NiAyMjQuMjc1IDU3LjIzMTIgMjczLjEyMSA0Mi4xNzE0QzMyMS45NjggMjcuMTExNSAyMDYuNTEyIC00LjA1MDM4IDIyNy4yOTcgLTMzLjI4NzlDMjQ4LjA4MiAtNjIuNTI1NSAzNjQuNzEyIC05LjAwNTY2IDI4Mi4xMiAtMTA3LjM1M1oiIGZpbGw9IiM0RDk0RkYiLz4KPC9nPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTkzLjE4OSAxNTIuODM2SDEzNi42NzRMODcuMjA4NiAxMDMuMDUxTDEzNy4zMSA1My4yNjYzTDE1MC45NTUgNDBIMTA1LjgxOUw0OC4zMzU5IDk3Ljc3NzNDNDUuNDM0OSAxMDAuNjg5IDQ1LjQ0OTggMTA1LjQwMiA0OC4zNjU2IDEwOC4yOTlMOTMuMTg5IDE1Mi44MzZaTTExOS4zMyAxMDMuMTY4SDExOC45OTVMMTE5LjMyNiAxMDMuMTY0TDExOS4zMyAxMDMuMTY4Wk0xMTkuMzMgMTAzLjE2OEwxNjguNzkxIDE1Mi45NDlMMTE4LjY5IDIwMi43MzRMMTA1LjA0NSAyMTZIMTUwLjE4TDIwNy42NjQgMTU4LjIyNkMyMTAuNTY1IDE1NS4zMTQgMjEwLjU1IDE1MC42MDIgMjA3LjYzNCAxNDcuNzA1TDE2Mi44MTEgMTAzLjE2OEgxMTkuMzNaIiBmaWxsPSJibGFjayIvPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2ZfMjAzNV8xMTA2IiB4PSItOTAuMjQxMSIgeT0iLTY5LjczNjkiIHdpZHRoPSI1NjkuNTU4IiBoZWlnaHQ9IjQ1MS40MzEiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNDkuMjMwOCIgcmVzdWx0PSJlZmZlY3QxX2ZvcmVncm91bmRCbHVyXzIwMzVfMTEwNiIvPgo8L2ZpbHRlcj4KPGZpbHRlciBpZD0iZmlsdGVyMV9mXzIwMzVfMTEwNiIgeD0iLTE2MC41MTEiIHk9Ii0xNjUuOTg3IiB3aWR0aD0iMzUxLjU5NiIgaGVpZ2h0PSIzNzEuNTA3IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9InNoYXBlIi8+CjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjQ5LjIzMDgiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8yMDM1XzExMDYiLz4KPC9maWx0ZXI+CjxmaWx0ZXIgaWQ9ImZpbHRlcjJfZl8yMDM1XzExMDYiIHg9Ii0yNDEuMDc4IiB5PSI2Ny42NDIiIHdpZHRoPSI0NDQuODUxIiBoZWlnaHQ9IjQyNC40NTIiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNDkuMjMwOCIgcmVzdWx0PSJlZmZlY3QxX2ZvcmVncm91bmRCbHVyXzIwMzVfMTEwNiIvPgo8L2ZpbHRlcj4KPGZpbHRlciBpZD0iZmlsdGVyM19mXzIwMzVfMTEwNiIgeD0iLTIwLjM5NjgiIHk9Ii0yNDIuNzU4IiB3aWR0aD0iNDMwLjE5MSIgaGVpZ2h0PSIzODUuMTA1IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9InNoYXBlIi8+CjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjQ5LjIzMDgiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8yMDM1XzExMDYiLz4KPC9maWx0ZXI+CjxjbGlwUGF0aCBpZD0iY2xpcDBfMjAzNV8xMTA2Ij4KPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==",
-  name: "Bitget Wallet" as WalletName<"Bitget Wallet">,
+  name: "Bitget Wallet" as AdapterWallet["name"],
 };
 
-const OVERRIDES: Record<string, Partial<AnyAptosWallet>> = {
+const OVERRIDES: Record<string, Partial<AdapterWallet>> = {
   nightly: NIGHTLY_WALLET,
   snap: SNAP_WALLET,
   bitkeep: BITGET_WALLET,
@@ -73,7 +67,7 @@ const OVERRIDES: Record<string, Partial<AnyAptosWallet>> = {
  * @param adapter Aptos adapter to get the override for or default to itself
  * @returns the current adapter or the override if it exists
  */
-const getOverride = (adapter: AnyAptosWallet): Partial<AnyAptosWallet> =>
+const getOverride = (adapter: AdapterWallet): Partial<AdapterWallet> =>
   OVERRIDES[adapter.name.toLocaleLowerCase()] || adapter;
 
 /**
@@ -85,9 +79,9 @@ const getOverride = (adapter: AnyAptosWallet): Partial<AnyAptosWallet> =>
  * @returns the property value from the overrides if it exists, otherwise the property value from the adapter
  */
 const getPropertyByName = <T>(
-  propertyName: keyof AnyAptosWallet,
-  overrides: Partial<AnyAptosWallet>,
-  adapter: AnyAptosWallet
+  propertyName: keyof AdapterWallet,
+  overrides: Partial<AdapterWallet>,
+  adapter: AdapterWallet
 ): T => (overrides[propertyName] || adapter[propertyName]) as T;
 
 /**
@@ -97,8 +91,8 @@ const getPropertyByName = <T>(
  * @returns the property value
  */
 const getWalletOverride = <T>(
-  propertyName: keyof AnyAptosWallet,
-  adapter: AnyAptosWallet
+  propertyName: keyof AdapterWallet,
+  adapter: AdapterWallet
 ): T => getPropertyByName<T>(propertyName, getOverride(adapter), adapter);
 
 type SendTransactionInput = {
@@ -106,84 +100,24 @@ type SendTransactionInput = {
   senderAuthenticator: AccountAuthenticator;
 };
 
-export class AptosWallet extends Wallet<
-  typeof CHAIN_ID_APTOS,
-  void,
-  AnyRawTransaction,
-  AccountAuthenticator,
-  SendTransactionInput,
-  AptosSubmitResult,
-  InputTransactionData,
-  AptosSubmitResult,
-  AptosMessage,
-  SignedAptosMessage,
-  NetworkInfo
-> {
+export class AptosWallet {
   private address: string | undefined;
   private network: NetworkInfo | undefined;
-  /**
-   * @param selectedAptosWallet The Aptos wallet adapter which will serve as the underlying connection to the wallet
-   * @param walletCore WalletCore class obtained via walletCoreFactory static function
-   */
   constructor(
-    private readonly selectedAptosWallet: AnyAptosWallet,
+    private readonly selectedAptosWallet: AdapterWallet,
     private readonly walletCore: WalletCore
-  ) {
-    super();
-  }
+  ) {}
 
-  /**
-   * @param config WalletCore configuration
-   * @param withNonStandard Add nonstandard wallets to the wallet core, these includes the following wallets:
-   * - BitgetWallet
-   * - MartianWallet
-   * - MSafeWalletAdapter
-   * - OKXWallet
-   * - PontemWallet
-   * - TrustWallet
-   * - FewchaWallet
-   * - PetraWallet
-   * @param newWalletsToAdd Add new wallets to the wallet core
-   * @returns {WalletCore} WalletCore instance
-   */
   static walletCoreFactory(
     config: DappConfig = { network: "mainnet" as Network },
     withNonStandard = true,
-    newWalletsToAdd: IAptosWallet[] = []
+    newWalletsToAdd: AdapterWallet[] = []
   ): WalletCore {
-    const nonStandardWallets: IAptosWallet[] = [
-      // We are forcing PetraWallet to avoid the NotDetected issue
-      new PetraWallet(),
-      // ---------------------------------------------------------
-      new BitgetWallet(),
-      new MartianWallet(),
-      new PontemWallet(),
-      // FIXME: These wallets are not working!!
-      new FewchaWallet() as IAptosWallet,
-      // new OKXWallet(),
-      // new MSafeWalletAdapter(),
-      // new TrustWallet() as IAptosWallet,
-    ];
-
-    return new WalletCore(
-      withNonStandard
-        ? [...nonStandardWallets, ...newWalletsToAdd]
-        : newWalletsToAdd,
-      // FIXME: T Wallet is not working and is removed from available wallets.
-      [
-        "Nightly",
-        "Continue with Google",
-        "Continue with Apple" as any,
-        "Mizu Wallet",
-        "Pontem Wallet",
-      ],
-      config,
-      true
-    );
+    return new WalletCore(undefined, config, true);
   }
 
   getName(): string {
-    return getWalletOverride("name", this.selectedAptosWallet);
+    return this.selectedAptosWallet.name;
   }
 
   getUrl(): string {
@@ -192,19 +126,14 @@ export class AptosWallet extends Wallet<
 
   async connect(): Promise<string[]> {
     await this.walletCore.connect(this.selectedAptosWallet.name);
-
-    // Set address
-    this.address = this.walletCore.account?.address;
-    this.walletCore.on("accountChange", async (accountInfo) => {
-      this.address = accountInfo?.address;
+    this.address = this.walletCore.account?.address as string | undefined;
+    this.walletCore.on("accountChange", (accountInfo: AccountInfo | null) => {
+      this.address = accountInfo?.address as string | undefined;
     });
-
-    // Set network
     this.network = this.walletCore.network || undefined;
-    this.walletCore.on("networkChange", async (network) => {
+    this.walletCore.on("networkChange", (network: NetworkInfo | null) => {
       this.network = network || undefined;
     });
-
     return this.getAddresses();
   }
 
@@ -223,7 +152,7 @@ export class AptosWallet extends Wallet<
   }
 
   getChainId() {
-    return CHAIN_ID_APTOS;
+    return "aptos";
   }
 
   getAddress(): string | undefined {
@@ -236,25 +165,27 @@ export class AptosWallet extends Wallet<
   }
 
   setMainAddress(): void {
-    throw new NotSupported();
+    throw new Error("Not supported");
   }
 
   getBalance(): Promise<string> {
-    throw new NotSupported();
+    throw new Error("Not supported");
   }
 
-  async signTransaction(tx: AnyRawTransaction): Promise<AccountAuthenticator> {
-    return this.walletCore.signTransaction(tx);
-  }
-
-  async sendTransaction(
-    txInput: SendTransactionInput
-  ): Promise<SendTransactionResult<AptosSubmitResult>> {
-    const result = await this.walletCore.submitTransaction({
-      transaction: txInput.transaction,
-      senderAuthenticator: txInput.senderAuthenticator,
+  async signTransaction(
+    tx: AnyRawTransaction | InputTransactionData
+  ): Promise<AccountAuthenticator> {
+    const result = await this.walletCore.signTransaction({
+      transactionOrPayload: tx,
     });
+    return result.authenticator;
+  }
 
+  async sendTransaction(txInput: {
+    transaction: InputSubmitTransactionData;
+    senderAuthenticator: AccountAuthenticator;
+  }): Promise<{ id: string; data: { hash: string } }> {
+    const result = await this.walletCore.submitTransaction(txInput.transaction);
     return {
       id: result.hash,
       data: { hash: result.hash },
@@ -263,32 +194,33 @@ export class AptosWallet extends Wallet<
 
   async signAndSendTransaction(
     tx: InputTransactionData
-  ): Promise<SendTransactionResult<AptosSubmitResult>> {
+  ): Promise<{ id: string; data: { hash: string } }> {
     const result = await this.walletCore.signAndSubmitTransaction(tx);
     return {
       id: result.hash,
-      data: result,
+      data: { hash: result.hash },
     };
   }
 
-  async signMessage(msg: SignMessagePayload): Promise<SignedAptosMessage> {
+  async signMessage(
+    msg: AptosSignMessageInput
+  ): Promise<AptosSignMessageOutput> {
     return this.walletCore.signMessage(msg);
   }
 
   getIcon(): string {
-    return getWalletOverride("icon", this.selectedAptosWallet);
+    return this.selectedAptosWallet.icon;
   }
 
-  getWalletState(): WalletState {
-    const state = this.selectedAptosWallet.readyState;
-    return WalletState[state || WalletState.NotDetected];
+  getWalletState(): WalletReadyState {
+    return this.selectedAptosWallet.readyState || WalletReadyState.NotDetected;
   }
 
   getFeatures(): BaseFeatures[] {
     return Object.values(BaseFeatures);
   }
 
-  supportsChain(chainId: ChainId): boolean {
-    return chainId === CHAIN_ID_APTOS;
+  supportsChain(chainId: string): boolean {
+    return chainId === "aptos";
   }
 }
