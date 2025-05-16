@@ -18,7 +18,12 @@ import type {
   AptosSignMessageOutput,
 } from "@aptos-labs/wallet-standard";
 import { WalletReadyState } from "@aptos-labs/wallet-adapter-core";
-import { BaseFeatures } from "@wormhole-labs/wallet-aggregator-core";
+import {
+  BaseFeatures,
+  CHAIN_ID_APTOS,
+  Wallet,
+  WalletState,
+} from "@wormhole-labs/wallet-aggregator-core";
 
 import type { Types as AptosLegacyTypes } from "aptos";
 
@@ -93,13 +98,15 @@ type SendTransactionInput = {
   senderAuthenticator: AccountAuthenticator;
 };
 
-export class AptosWallet {
+export class AptosWallet extends Wallet {
   private address: string | undefined;
   private network: NetworkInfo | undefined;
   constructor(
     private readonly selectedAptosWallet: AdapterWallet,
     private readonly walletCore: WalletCore
-  ) {}
+  ) {
+    super();
+  }
 
   static walletCoreFactory(
     config: DappConfig = { network: "mainnet" as Network },
@@ -126,6 +133,9 @@ export class AptosWallet {
     this.walletCore.on("networkChange", (network: NetworkInfo | null) => {
       this.network = network || undefined;
     });
+    this.walletCore.on("disconnect", () => {
+      this.emit("disconnect");
+    });
     return this.getAddresses();
   }
 
@@ -144,7 +154,7 @@ export class AptosWallet {
   }
 
   getChainId() {
-    return "aptos";
+    return CHAIN_ID_APTOS;
   }
 
   getAddress(): string | undefined {
@@ -204,15 +214,17 @@ export class AptosWallet {
     return this.selectedAptosWallet.icon;
   }
 
-  getWalletState(): WalletReadyState {
-    return this.selectedAptosWallet.readyState || WalletReadyState.NotDetected;
+  getWalletState(): WalletState {
+    const state =
+      this.selectedAptosWallet.readyState || WalletReadyState.NotDetected;
+    return WalletState[state];
   }
 
   getFeatures(): BaseFeatures[] {
     return Object.values(BaseFeatures);
   }
 
-  supportsChain(chainId: string): boolean {
-    return chainId === "aptos";
+  supportsChain(chainId: number): boolean {
+    return chainId === CHAIN_ID_APTOS;
   }
 }
