@@ -89,7 +89,7 @@ export interface WatchAssetParams {
 }
 
 export interface ConnectParams {
-  evmChainId?: number;
+  chainId?: number;
 }
 
 export type EthereumMessage = string | Uint8Array;
@@ -154,7 +154,16 @@ export abstract class EVMWallet<
     this.connector = this.createConnector();
   }
 
-  async connect({ evmChainId }: ConnectParams = {}): Promise<Address[]> {
+  async connect({ chainId }: ConnectParams = {}): Promise<Address[]> {
+    for (let chain of this.chains) {
+      if (
+        chain.rpcUrls.public === undefined &&
+        chain.rpcUrls.default !== undefined
+      ) {
+        chain.rpcUrls.public = chain.rpcUrls.default;
+      }
+    }
+
     const { publicClient } = configureChains(this.chains, [publicProvider()]);
 
     this.wagmiConfig = createConfig<PublicClient>({
@@ -164,7 +173,7 @@ export abstract class EVMWallet<
     });
 
     await this.connector.connect({
-      chainId: evmChainId || this.config.preferredChain,
+      chainId: chainId || this.config.preferredChain,
     });
 
     this.provider = new ethers.BrowserProvider(
