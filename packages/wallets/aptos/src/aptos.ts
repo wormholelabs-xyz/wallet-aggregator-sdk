@@ -16,7 +16,7 @@ import type {
   AptosSignMessageInput,
   AptosSignMessageOutput,
 } from "@aptos-labs/wallet-standard";
-import { WalletReadyState } from "@aptos-labs/wallet-adapter-core/dist/constants";
+import { WalletReadyState } from "@aptos-labs/wallet-adapter-core";
 import {
   BaseFeatures,
   CHAIN_ID_APTOS,
