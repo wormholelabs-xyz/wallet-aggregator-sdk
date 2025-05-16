@@ -133,24 +133,9 @@ importers:
       '@aptos-labs/wallet-standard':
         specifier: ^0.2.0
         version: 0.2.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(@wallet-standard/core@1.0.3)
-      '@bitget-wallet/aptos-wallet-adapter':
-        specifier: ^0.1.2
-        version: 0.1.2(@aptos-labs/wallet-adapter-core@5.5.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(@mizuwallet-sdk/protocol@0.0.6)(@telegram-apps/bridge@1.9.2)(@wallet-standard/core@1.0.3)(aptos@1.21.0))(aptos@1.21.0)
-      '@martianwallet/aptos-wallet-adapter':
-        specifier: ^0.0.5
-        version: 0.0.5
-      '@pontem/wallet-adapter-plugin':
-        specifier: ^0.2.1
-        version: 0.2.1
       '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
-      fewcha-plugin-wallet-adapter:
-        specifier: ^0.1.3
-        version: 0.1.3(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      petra-plugin-wallet-adapter:
-        specifier: ^0.4.5
-        version: 0.4.5(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(aptos@1.21.0)
     devDependencies:
       '@types/node':
         specifier: ^18.19.69
@@ -320,13 +305,13 @@ importers:
         version: 1.14.6(google-protobuf@3.21.2)
       '@injectivelabs/sdk-ts':
         specifier: 1.14.7
-        version: 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)(utf-8-validate@5.0.10)
+        version: 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
       '@injectivelabs/ts-types':
         specifier: 1.14.4
         version: 1.14.4
       '@injectivelabs/wallet-ts':
         specifier: 1.14.4
-        version: 1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)
+        version: 1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
       '@wormhole-labs/wallet-aggregator-core':
         specifier: workspace:^
         version: link:../core
@@ -601,18 +586,6 @@ packages:
     resolution: {integrity: sha512-2sFX5nQZu70koLKs2AxJI0/P2ggevB0qa6F3i6FK6Zg0fhJXjHKr0TywwTvzM46qmn4vEygw+QTXnfhLGIbgEQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aptos-labs/wallet-adapter-core@2.1.0':
-    resolution: {integrity: sha512-ZSCCsFt2heEh9IDaObbzw8EwqfzJGCWGBoaGouBtOYn2DVkh5R0P9xRj6ryF9cuO+tkfP+8KZmZ9m4c+xsJN2g==}
-
-  '@aptos-labs/wallet-adapter-core@2.2.0':
-    resolution: {integrity: sha512-JL0zTXXoSQba1EDGqY5yTJxZVKMKwgMKZNA1JyV54s5loWzE2tinwg002EB+ONodkVmMhKbWnajCFFOgvgk+NQ==}
-
-  '@aptos-labs/wallet-adapter-core@3.16.0':
-    resolution: {integrity: sha512-4pBNoDLzuIOxdNwJEO770bkxROuEIQis0H0lFOVVCL33jK8/MWLlQo8hFgc71ovN1vWfdERDEgPLbAtVChploQ==}
-    peerDependencies:
-      '@aptos-labs/ts-sdk': ^1.13.2
-      aptos: ^1.21.0
-
   '@aptos-labs/wallet-adapter-core@5.5.0':
     resolution: {integrity: sha512-l9BCSuWPlcH8onYTPoEWH38zgMVWVrwscGGf8EF6Qb++uU4YDq0kVWn2mKPt75LId4ByDLBbGZ0mJGrjS+uLUQ==}
     peerDependencies:
@@ -659,12 +632,6 @@ packages:
   '@babel/runtime@7.23.7':
     resolution: {integrity: sha512-w06OXVOFso7LcbzMiDGt+3X7Rh7Ho8MmgPoWU3rarH+8upf+wSU/grlGbWzQyr3DkdN6ZeuMFjpdwW0Q+HxobA==}
     engines: {node: '>=6.9.0'}
-
-  '@bitget-wallet/aptos-wallet-adapter@0.1.2':
-    resolution: {integrity: sha512-6dImtKlwdk0zuYKQpeZ/nOVyyBXqTxVin9ZLgdyPXsnBcpy0PnyGgffsfsOVHxk93eOdiRjNxoiCs1b4a+1ssg==}
-    peerDependencies:
-      '@aptos-labs/wallet-adapter-core': 3.5.0
-      aptos: ^1.21.0
 
   '@blockshake/defly-connect@1.1.1':
     resolution: {integrity: sha512-Ft3/zqnUeV5dmTXIyTB5amyUdwG899NQ9PSVdGf9oNsnq+Q+IJMVo+GjntTC8sC7/z9cDRYJ2xnj3YjCtTfQcg==}
@@ -1149,9 +1116,6 @@ packages:
   '@evanhahn/lottie-web-light@5.8.1':
     resolution: {integrity: sha512-U0G1tt3/UEYnyCNNslWPi1dB7X1xQ9aoSip+B3GTKO/Bns8yz/p39vBkRSN9d25nkbHuCsbjky2coQftj5YVKw==}
 
-  '@fewcha/web3@0.1.38':
-    resolution: {integrity: sha512-t39g9V5zAiYZPGSahp4a0B4WM5IqxQJxr5ednv0f0l5amJZMPyOinFeZDgkLqTIzhe7yq6yIndKbqzPfdu1rng==}
-
   '@fractalwagmi/popup-connection@1.0.18':
     resolution: {integrity: sha512-QcHe8bfeaQAKnFEvnxLqIAD7RFL7Z7bzn0BnOyDJxuj55NFBRVFGmq69MCqn2o6kmmfmusfYSQHNLWiv5L8H5A==}
     peerDependencies:
@@ -1447,9 +1411,6 @@ packages:
   '@lit/reactive-element@1.6.1':
     resolution: {integrity: sha512-va15kYZr7KZNNPZdxONGQzpUr+4sxVu7V/VG7a8mRfPPXUyhEYj5RzXCQmGrlP3tAh0L3HHm5AjBMFYRqlM9SA==}
 
-  '@martianwallet/aptos-wallet-adapter@0.0.5':
-    resolution: {integrity: sha512-x6Q3bM7HSltCAD8Zl0AeU1AFhu0M+Ho22QP+oOXWhdb4TledVVLNfGIAx1jP4slqfcpDGOjnibPtPt8Bm32wmg==}
-
   '@metamask/detect-provider@2.0.0':
     resolution: {integrity: sha512-sFpN+TX13E9fdBDh9lvQeZdJn4qYoRb/6QF2oZZK/Pn559IhCFacPMU1rMuqyXoFQF3JSJfii2l98B87QDPeCQ==}
     engines: {node: '>=14.0.0'}
@@ -1539,9 +1500,6 @@ packages:
       '@aptos-labs/wallet-standard': ^0.2.0
       '@wallet-standard/core': ^1.1.0
 
-  '@mysten/bcs@0.3.0':
-    resolution: {integrity: sha512-Me6OkrS+idPq+ZUM1MEcKP9YOTacZKLwo0gf8rfeImQ+G25tqPRhjpccZGOUJGOKh+gojH2vjkWi2TYJv9kNCg==}
-
   '@mysten/bcs@0.7.1':
     resolution: {integrity: sha512-wFPb8bkhwrbiStfZMV5rFM7J+umpke59/dNjDp+UYJKykNlW23LCk2ePyEUvGdb62HGJM1jyOJ8g4egE3OmdKA==}
 
@@ -1553,11 +1511,6 @@ packages:
 
   '@mysten/bcs@0.9.0':
     resolution: {integrity: sha512-h56essa8oSS4/J0Dby8k8stMoOSt+QZIEIeZNtgTOWh9HeV69yFg2BUg/+Rk7jzfWzvUmw9lFyKNipXcD5QOTw==}
-
-  '@mysten/sui.js@0.13.0':
-    resolution: {integrity: sha512-8s4IYN6GH95Begjuy0Xr45vQyyVZZHx83g5hJOpT9o98kQgdjaO218UdqQRVoFt/TODpNsTaI5OlymlKCgFVTQ==}
-    engines: {node: '>=16'}
-    deprecated: This package has been renamed to @mysten/sui, please update to use the renamed package.
 
   '@mysten/sui.js@0.32.2':
     resolution: {integrity: sha512-/Hm4xkGolJhqj8FvQr7QSHDTlxIvL52mtbOao9f75YjrBh7y1Uh9kbJSY7xiTF1NY9sv6p5hUVlYRJuM0Hvn9A==}
@@ -1631,9 +1584,6 @@ packages:
   '@noble/hashes@1.6.1':
     resolution: {integrity: sha512-pq5D8h10hHBjyqX+cfBm0i8JUXJ0UhczFc4r74zbuT9XgewFo2E3J1cOaGtdZynILNmQ685YWGzGE1Zv6io50w==}
     engines: {node: ^14.21.3 || >=16}
-
-  '@noble/secp256k1@1.7.1':
-    resolution: {integrity: sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1754,9 +1704,6 @@ packages:
     resolution: {integrity: sha512-m2PL3CX8TUH3Y65T22yv4+9mes7hxjsie8AbZHRFe8uR5LLgWk1kyQHM8/KSsM52v7YUcG8G1IlsFgzsW+36xA==}
     peerDependencies:
       algosdk: ^2.1.0
-
-  '@pontem/wallet-adapter-plugin@0.2.1':
-    resolution: {integrity: sha512-mrhCT+mFsDtjFHZj9LBksY++ciQiAlr+gkHhvEzkuQkYuHkCf6HwKOkIlDL42cl7y8/15NrfZomEQ5Uxudhc3g==}
 
   '@project-serum/sol-wallet-adapter@0.2.0':
     resolution: {integrity: sha512-ed7wZwlDqjF88VCq7eHVO8njHqdUkBxBL8WEVOnB47ooLO4btOJt6GBdkKpKqKX86c86LiEROJclcdW8e7kIjg==}
@@ -2414,9 +2361,6 @@ packages:
 
   '@types/connect@3.4.35':
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
-
-  '@types/connect@3.4.38':
-    resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -3385,9 +3329,6 @@ packages:
   cross-fetch@3.1.5:
     resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}
 
-  cross-fetch@3.2.0:
-    resolution: {integrity: sha512-Q+xVJLoGOeIMXZmbUK4HYk+69cQH6LudR0Vu/pRm2YlU/hDV9CiS0gKUMaWY5f2NeUH9C1nV3bsTlCo0FsTV1Q==}
-
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -3780,9 +3721,6 @@ packages:
 
   fastq@1.14.0:
     resolution: {integrity: sha512-eR2D+V9/ExcbF9ls441yIuN6TI2ED1Y2ZcA5BmMtJsOkWOFRJQ0Jt0g1UwqXJJVAb+V+umH5Dfr8oh4EVP7VVg==}
-
-  fewcha-plugin-wallet-adapter@0.1.3:
-    resolution: {integrity: sha512-Ek59XhrkjVN+Yj1eBNI/SLGLgo9Sn1LVh8uDKgBaNix7nNAAJrgo2CoPCk/L595TSoO5FJtkBFdlnvRPAGJlAQ==}
 
   file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
@@ -4193,11 +4131,6 @@ packages:
     peerDependencies:
       ws: '*'
 
-  jayson@3.7.0:
-    resolution: {integrity: sha512-tfy39KJMrrXJ+mFcMpxwBvFDetS8LAID93+rycFglIQM4kl3uNR3W4lBLE/FFhsoUCEox5Dt2adVpDm/XtebbQ==}
-    engines: {node: '>=8'}
-    hasBin: true
-
   jayson@4.1.0:
     resolution: {integrity: sha512-R6JlbyLN53Mjku329XoRT2zJAE6ZgOQ8f91ucYdMCD4nkGCF9kZSrcGXpHIU4jeKj58zUZke2p+cdQchU7Ly7A==}
     engines: {node: '>=8'}
@@ -4426,9 +4359,6 @@ packages:
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
-
-  lossless-json@1.0.5:
-    resolution: {integrity: sha512-RicKUuLwZVNZ6ZdJHgIZnSeA05p8qWc5NW0uR96mpPIjN9WDLUg9+kj1esQU1GkPn9iLZVKatSQK5gyiaFHgJA==}
 
   lottie-web@5.10.2:
     resolution: {integrity: sha512-d0PFIGiwuMsJYaF4uPo+qG8dEorlI+xFI2zrrFtE1bGO4WoLIz+NjremxEq1swpR7juR10aeOtmNh3d6G3ub0A==}
@@ -4754,12 +4684,6 @@ packages:
   pbkdf2@3.1.2:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
-
-  petra-plugin-wallet-adapter@0.4.5:
-    resolution: {integrity: sha512-x2S2xRAIz/5ytbB2wHCTJhqLBDsgWPEVmj7X2aril1BUplIGPJHTstgo8hqOngb2rtYbBY+wviyS9Di4IDCGRA==}
-    peerDependencies:
-      '@aptos-labs/ts-sdk': ^1.3.0
-      aptos: ^1.21.0
 
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
@@ -5109,9 +5033,6 @@ packages:
   rlp@2.2.7:
     resolution: {integrity: sha512-d5gdPmgQ0Z+AklL2NVXr/IoSjNZFfTVvQWzL/AM2AOcSzYP2xjlb0AC8YyCLc41MSNf6P6QVtjgPdmVtzb+4lQ==}
     hasBin: true
-
-  rpc-websockets@7.11.2:
-    resolution: {integrity: sha512-pL9r5N6AVHlMN/vT98+fcO+5+/UcPLf/4tq+WUaid/PPUGS/ttJ3y8e9IqmaWKtShNAysMSjkczuEA49NuV7UQ==}
 
   rpc-websockets@7.5.1:
     resolution: {integrity: sha512-kGFkeTsmd37pHPMaHIgN1LVKXMi0JD782v4Ds9ZKtLlwdTKjn+CxM9A9/gLT2LaOuEcEFGL98h1QWQtlOIdW0w==}
@@ -5784,18 +5705,6 @@ packages:
       utf-8-validate:
         optional: true
 
-  ws@8.18.0:
-    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
-    engines: {node: '>=10.0.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: '>=5.0.2'
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
   ws@8.2.3:
     resolution: {integrity: sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==}
     engines: {node: '>=10.0.0'}
@@ -5892,7 +5801,7 @@ snapshots:
 
   '@apocentre/alias-sampling@0.5.3': {}
 
-  '@apollo/client@3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
+  '@apollo/client@3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
     dependencies:
       '@graphql-typed-document-node/core': 3.1.1(graphql@16.6.0)
       '@wry/context': 0.7.0
@@ -5909,7 +5818,7 @@ snapshots:
       tslib: 2.5.0
       zen-observable-ts: 1.2.5
     optionalDependencies:
-      react: 18.2.0
+      react: 16.13.1
       react-dom: 16.13.1(react@16.13.1)
 
   '@apollo/client@3.7.1(graphql@16.6.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
@@ -6021,36 +5930,6 @@ snapshots:
     transitivePeerDependencies:
       - got
 
-  '@aptos-labs/wallet-adapter-core@2.1.0':
-    dependencies:
-      aptos: 1.21.0
-      buffer: 6.0.3
-      eventemitter3: 4.0.7
-      tweetnacl: 1.0.3
-    transitivePeerDependencies:
-      - debug
-
-  '@aptos-labs/wallet-adapter-core@2.2.0':
-    dependencies:
-      aptos: 1.21.0
-      buffer: 6.0.3
-      eventemitter3: 4.0.7
-      tweetnacl: 1.0.3
-    transitivePeerDependencies:
-      - debug
-
-  '@aptos-labs/wallet-adapter-core@3.16.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(aptos@1.21.0)':
-    dependencies:
-      '@aptos-labs/ts-sdk': 2.0.0(got@11.8.6)
-      '@aptos-labs/wallet-standard': 0.0.11
-      '@atomrigslab/aptos-wallet-adapter': 0.1.21(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))
-      aptos: 1.21.0
-      buffer: 6.0.3
-      eventemitter3: 4.0.7
-      tweetnacl: 1.0.3
-    transitivePeerDependencies:
-      - debug
-
   '@aptos-labs/wallet-adapter-core@5.5.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(@mizuwallet-sdk/protocol@0.0.6)(@telegram-apps/bridge@1.9.2)(@wallet-standard/core@1.0.3)(aptos@1.21.0)':
     dependencies:
       '@aptos-connect/wallet-adapter-plugin': 2.4.1(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(@aptos-labs/wallet-standard@0.4.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(@wallet-standard/core@1.0.3))(@telegram-apps/bridge@1.9.2)(@wallet-standard/core@1.0.3)(aptos@1.21.0)
@@ -6124,11 +6003,6 @@ snapshots:
   '@babel/runtime@7.23.7':
     dependencies:
       regenerator-runtime: 0.14.1
-
-  '@bitget-wallet/aptos-wallet-adapter@0.1.2(@aptos-labs/wallet-adapter-core@5.5.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(@mizuwallet-sdk/protocol@0.0.6)(@telegram-apps/bridge@1.9.2)(@wallet-standard/core@1.0.3)(aptos@1.21.0))(aptos@1.21.0)':
-    dependencies:
-      '@aptos-labs/wallet-adapter-core': 5.5.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(@mizuwallet-sdk/protocol@0.0.6)(@telegram-apps/bridge@1.9.2)(@wallet-standard/core@1.0.3)(aptos@1.21.0)
-      aptos: 1.21.0
 
   '@blockshake/defly-connect@1.1.1(algosdk@1.24.0)(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
@@ -7064,25 +6938,14 @@ snapshots:
 
   '@evanhahn/lottie-web-light@5.8.1': {}
 
-  '@fewcha/web3@0.1.38(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
+  '@fractalwagmi/popup-connection@1.0.18(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
     dependencies:
-      '@mysten/sui.js': 0.13.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      aptos: 1.21.0
-      buffer: 6.0.3
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - encoding
-      - utf-8-validate
-
-  '@fractalwagmi/popup-connection@1.0.18(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
-    dependencies:
-      react: 18.2.0
+      react: 16.13.1
       react-dom: 16.13.1(react@16.13.1)
 
-  '@fractalwagmi/solana-wallet-adapter@0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
+  '@fractalwagmi/solana-wallet-adapter@0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
     dependencies:
-      '@fractalwagmi/popup-connection': 1.0.18(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
+      '@fractalwagmi/popup-connection': 1.0.18(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       bs58: 5.0.0
     transitivePeerDependencies:
@@ -7350,9 +7213,9 @@ snapshots:
       - subscriptions-transport-ws
       - utf-8-validate
 
-  '@injectivelabs/sdk-ts@1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)(utf-8-validate@5.0.10)':
+  '@injectivelabs/sdk-ts@1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)':
     dependencies:
-      '@apollo/client': 3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
+      '@apollo/client': 3.7.1(graphql@16.6.0)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
       '@cosmjs/amino': 0.32.4
       '@cosmjs/proto-signing': 0.32.4
       '@cosmjs/stargate': 0.32.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
@@ -7514,7 +7377,7 @@ snapshots:
       - debug
       - google-protobuf
 
-  '@injectivelabs/wallet-ts@1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)':
+  '@injectivelabs/wallet-ts@1.14.4(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(google-protobuf@3.21.2)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)':
     dependencies:
       '@cosmjs/launchpad': 0.27.1
       '@cosmjs/proto-signing': 0.30.1
@@ -7524,7 +7387,7 @@ snapshots:
       '@ethereumjs/tx': 4.1.2
       '@injectivelabs/exceptions': 1.14.4(google-protobuf@3.21.2)
       '@injectivelabs/networks': 1.14.6(google-protobuf@3.21.2)
-      '@injectivelabs/sdk-ts': 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@18.2.0))(react@18.2.0)(utf-8-validate@5.0.10)
+      '@injectivelabs/sdk-ts': 1.14.7(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
       '@injectivelabs/ts-types': 1.14.4
       '@injectivelabs/utils': 1.14.4(google-protobuf@3.21.2)
       '@keplr-wallet/cosmos': 0.11.59
@@ -7534,7 +7397,7 @@ snapshots:
       '@ledgerhq/hw-transport-webhid': 6.27.14
       '@ledgerhq/hw-transport-webusb': 6.27.14
       '@metamask/eth-sig-util': 4.0.1
-      '@solana/wallet-adapter-wallets': 0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)
+      '@solana/wallet-adapter-wallets': 0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)
       '@toruslabs/torus-embed': 1.41.2(@babel/runtime@7.20.13)
       '@trezor/connect-web': 9.0.8(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       alchemy-sdk: 2.8.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
@@ -7860,13 +7723,6 @@ snapshots:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.1.2
 
-  '@martianwallet/aptos-wallet-adapter@0.0.5':
-    dependencies:
-      '@aptos-labs/wallet-adapter-core': 2.1.0
-      aptos: 1.21.0
-    transitivePeerDependencies:
-      - debug
-
   '@metamask/detect-provider@2.0.0': {}
 
   '@metamask/eth-sig-util@4.0.1':
@@ -8019,10 +7875,6 @@ snapshots:
     transitivePeerDependencies:
       - '@mizuwallet-sdk/protocol'
 
-  '@mysten/bcs@0.3.0':
-    dependencies:
-      bn.js: 5.2.1
-
   '@mysten/bcs@0.7.1':
     dependencies:
       bs58: 5.0.0
@@ -8038,26 +7890,6 @@ snapshots:
   '@mysten/bcs@0.9.0':
     dependencies:
       bs58: 5.0.0
-
-  '@mysten/sui.js@0.13.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
-    dependencies:
-      '@mysten/bcs': 0.3.0
-      '@noble/hashes': 1.6.1
-      '@noble/secp256k1': 1.7.1
-      '@scure/bip32': 1.6.0
-      '@scure/bip39': 1.5.0
-      bn.js: 5.2.1
-      buffer: 6.0.3
-      cross-fetch: 3.2.0
-      jayson: 3.7.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      js-sha3: 0.8.0
-      lossless-json: 1.0.5
-      rpc-websockets: 7.11.2
-      tweetnacl: 1.0.3
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - utf-8-validate
 
   '@mysten/sui.js@0.32.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
@@ -8198,8 +8030,6 @@ snapshots:
 
   '@noble/hashes@1.6.1': {}
 
-  '@noble/secp256k1@1.7.1': {}
-
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -8331,13 +8161,6 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-
-  '@pontem/wallet-adapter-plugin@0.2.1':
-    dependencies:
-      '@aptos-labs/wallet-adapter-core': 2.2.0
-      aptos: 1.21.0
-    transitivePeerDependencies:
-      - debug
 
   '@project-serum/sol-wallet-adapter@0.2.0(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
     dependencies:
@@ -8580,9 +8403,9 @@ snapshots:
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/web3.js': 1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10)
 
-  '@solana/wallet-adapter-fractal@0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)':
+  '@solana/wallet-adapter-fractal@0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)':
     dependencies:
-      '@fractalwagmi/solana-wallet-adapter': 0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
+      '@fractalwagmi/solana-wallet-adapter': 0.1.1(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/web3.js': 1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
@@ -8778,7 +8601,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@solana/wallet-adapter-wallets@0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@18.2.0)(utf-8-validate@5.0.10)':
+  '@solana/wallet-adapter-wallets@0.19.10(@babel/runtime@7.20.13)(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bs58@5.0.0)(bufferutil@4.0.9)(react-dom@16.13.1(react@16.13.1))(react@16.13.1)(utf-8-validate@5.0.10)':
     dependencies:
       '@solana/wallet-adapter-alpha': 0.1.7(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-avana': 0.1.10(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
@@ -8793,7 +8616,7 @@ snapshots:
       '@solana/wallet-adapter-coinbase': 0.1.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-coinhub': 0.3.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-exodus': 0.1.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
-      '@solana/wallet-adapter-fractal': 0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@18.2.0))(react@18.2.0)
+      '@solana/wallet-adapter-fractal': 0.1.5(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-dom@16.13.1(react@16.13.1))(react@16.13.1)
       '@solana/wallet-adapter-glow': 0.1.15(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-huobi': 0.1.12(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@solana/wallet-adapter-hyperpay': 0.1.11(@solana/web3.js@1.87.6(bufferutil@4.0.9)(utf-8-validate@5.0.10))
@@ -9390,10 +9213,6 @@ snapshots:
   '@types/connect@3.4.35':
     dependencies:
       '@types/node': 18.11.11
-
-  '@types/connect@3.4.38':
-    dependencies:
-      '@types/node': 18.19.69
 
   '@types/debug@4.1.12':
     dependencies:
@@ -11009,12 +10828,6 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  cross-fetch@3.2.0:
-    dependencies:
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
-
   cross-spawn@7.0.3:
     dependencies:
       path-key: 3.1.1
@@ -11598,17 +11411,6 @@ snapshots:
     dependencies:
       reusify: 1.0.4
 
-  fewcha-plugin-wallet-adapter@0.1.3(bufferutil@4.0.9)(utf-8-validate@5.0.10):
-    dependencies:
-      '@aptos-labs/wallet-adapter-core': 2.2.0
-      '@fewcha/web3': 0.1.38(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      aptos: 1.21.0
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - encoding
-      - utf-8-validate
-
   file-entry-cache@6.0.1:
     dependencies:
       flat-cache: 3.0.4
@@ -11998,10 +11800,6 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  isomorphic-ws@4.0.1(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)):
-    dependencies:
-      ws: 7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-
   isomorphic-ws@4.0.1(ws@7.5.9(bufferutil@4.0.7)(utf-8-validate@5.0.10)):
     dependencies:
       ws: 7.5.9(bufferutil@4.0.7)(utf-8-validate@5.0.10)
@@ -12017,25 +11815,6 @@ snapshots:
   isows@1.0.3(ws@8.13.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)):
     dependencies:
       ws: 8.13.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-
-  jayson@3.7.0(bufferutil@4.0.9)(utf-8-validate@5.0.10):
-    dependencies:
-      '@types/connect': 3.4.38
-      '@types/node': 12.20.55
-      '@types/ws': 7.4.7
-      JSONStream: 1.3.5
-      commander: 2.20.3
-      delay: 5.0.0
-      es6-promisify: 5.0.0
-      eyes: 0.1.8
-      isomorphic-ws: 4.0.1(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10))
-      json-stringify-safe: 5.0.1
-      lodash: 4.17.21
-      uuid: 8.3.2
-      ws: 7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
 
   jayson@4.1.0(bufferutil@4.0.7)(utf-8-validate@5.0.10):
     dependencies:
@@ -12303,8 +12082,6 @@ snapshots:
   loose-envify@1.4.0:
     dependencies:
       js-tokens: 4.0.0
-
-  lossless-json@1.0.5: {}
 
   lottie-web@5.10.2: {}
 
@@ -12591,14 +12368,6 @@ snapshots:
       ripemd160: 2.0.2
       safe-buffer: 5.2.1
       sha.js: 2.4.11
-
-  petra-plugin-wallet-adapter@0.4.5(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(aptos@1.21.0):
-    dependencies:
-      '@aptos-labs/ts-sdk': 2.0.0(got@11.8.6)
-      '@aptos-labs/wallet-adapter-core': 3.16.0(@aptos-labs/ts-sdk@2.0.0(got@11.8.6))(aptos@1.21.0)
-      aptos: 1.21.0
-    transitivePeerDependencies:
-      - debug
 
   picomatch@2.3.1: {}
 
@@ -13044,15 +12813,6 @@ snapshots:
   rlp@2.2.7:
     dependencies:
       bn.js: 5.2.1
-
-  rpc-websockets@7.11.2:
-    dependencies:
-      eventemitter3: 4.0.7
-      uuid: 8.3.2
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-    optionalDependencies:
-      bufferutil: 4.0.9
-      utf-8-validate: 5.0.10
 
   rpc-websockets@7.5.1:
     dependencies:
@@ -13689,11 +13449,6 @@ snapshots:
       utf-8-validate: 5.0.10
 
   ws@8.17.1(bufferutil@4.0.9)(utf-8-validate@5.0.10):
-    optionalDependencies:
-      bufferutil: 4.0.9
-      utf-8-validate: 5.0.10
-
-  ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10):
     optionalDependencies:
       bufferutil: 4.0.9
       utf-8-validate: 5.0.10

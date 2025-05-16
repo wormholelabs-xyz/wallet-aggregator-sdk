@@ -10,6 +10,7 @@ import {
   DappConfig,
   InputTransactionData,
 } from "@aptos-labs/wallet-adapter-core";
+import type { AvailableWallets } from "@aptos-labs/wallet-adapter-core";
 import type {
   NetworkInfo,
   AccountInfo,
@@ -17,15 +18,7 @@ import type {
   AptosSignMessageOutput,
 } from "@aptos-labs/wallet-standard";
 import { WalletReadyState } from "@aptos-labs/wallet-adapter-core";
-import {
-  BaseFeatures,
-  CHAIN_ID_APTOS,
-  ChainId,
-  NotSupported,
-  SendTransactionResult,
-  Wallet,
-  WalletState,
-} from "@wormhole-labs/wallet-aggregator-core";
+import { BaseFeatures } from "@wormhole-labs/wallet-aggregator-core";
 
 import type { Types as AptosLegacyTypes } from "aptos";
 
@@ -110,10 +103,9 @@ export class AptosWallet {
 
   static walletCoreFactory(
     config: DappConfig = { network: "mainnet" as Network },
-    withNonStandard = true,
-    newWalletsToAdd: AdapterWallet[] = []
+    wallets: AvailableWallets[] = ["Petra", "Pontem Wallet", "Nightly"]
   ): WalletCore {
-    return new WalletCore(undefined, config, true);
+    return new WalletCore(wallets, config, true);
   }
 
   getName(): string {
