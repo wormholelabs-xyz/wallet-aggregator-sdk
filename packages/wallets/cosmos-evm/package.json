@@ -1,7 +1,7 @@
 {
   "name": "@wormhole-labs/wallet-aggregator-cosmos-evm",
   "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/cosmos",
-  "version": "0.0.1-alpha.8",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

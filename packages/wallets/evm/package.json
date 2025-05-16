@@ -1,7 +1,7 @@
 {
   "name": "@wormhole-labs/wallet-aggregator-evm",
   "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/evm",
-  "version": "0.0.2-alpha.8",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
