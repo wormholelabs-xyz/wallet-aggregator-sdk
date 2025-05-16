@@ -118,9 +118,9 @@ export class AptosWallet {
 
   async connect(): Promise<string[]> {
     await this.walletCore.connect(this.selectedAptosWallet.name);
-    this.address = this.walletCore.account?.address as string | undefined;
+    this.address = this.walletCore.account?.address?.toString();
     this.walletCore.on("accountChange", (accountInfo: AccountInfo | null) => {
-      this.address = accountInfo?.address as string | undefined;
+      this.address = accountInfo?.address?.toString();
     });
     this.network = this.walletCore.network || undefined;
     this.walletCore.on("networkChange", (network: NetworkInfo | null) => {
