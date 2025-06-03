@@ -105,7 +105,7 @@ export class Eip6963Wallet extends EVMWallet<
   }
 
   registerProvider = (event: AnounceProvider) => {
-    if (event.detail.info.name === this.name) {
+    if (event.detail?.info?.name === this.name) {
       this.detail = event.detail;
       this.createConnector();
     }
