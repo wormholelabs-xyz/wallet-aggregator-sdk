@@ -1,4 +1,4 @@
-import { CoinbaseWalletConnector } from "@wagmi/core/connectors/coinbaseWallet";
+import { coinbaseWallet } from "@wagmi/connectors";
 import { EVMWallet, EVMWalletConfig, EVMWalletType } from "./evm";
 
 /** Coinbase Wallet SDK Options */
@@ -33,18 +33,15 @@ export interface CoinbaseWalletConfig
   options: CoinbaseWalletSDKOptions;
 }
 
-export class CoinbaseWallet extends EVMWallet<
-  CoinbaseWalletConnector,
-  CoinbaseWalletSDKOptions
-> {
+export class CoinbaseWallet extends EVMWallet<CoinbaseWalletSDKOptions> {
   constructor(config: CoinbaseWalletConfig) {
     super(config);
   }
 
-  protected createConnector(): CoinbaseWalletConnector {
-    return new CoinbaseWalletConnector({
-      chains: this.chains,
-      options: this.connectorOptions,
+  protected createConnectorFn(): any {
+    return coinbaseWallet({
+      appName: this.connectorOptions.appName,
+      appLogoUrl: this.connectorOptions.appLogoUrl,
     });
   }
 

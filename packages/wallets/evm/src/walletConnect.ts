@@ -1,25 +1,18 @@
-import { WalletConnectConnector } from "@wagmi/core/connectors/walletConnect";
+import { walletConnect } from "@wagmi/connectors";
 import { EVMWalletConfig, EVMWalletType } from "./evm";
 import { BaseWalletConnectWallet } from "./walletConnectBase";
 
-type WalletConnectOptions = ConstructorParameters<
-  typeof WalletConnectConnector
->[0]["options"];
+// WalletConnect v2 options
+type WalletConnectOptions = Parameters<typeof walletConnect>[0];
 
 export type WalletConnectWalletConfig = EVMWalletConfig<WalletConnectOptions>;
 
-export class WalletConnectWallet extends BaseWalletConnectWallet<
-  WalletConnectConnector,
-  WalletConnectOptions
-> {
+export class WalletConnectWallet extends BaseWalletConnectWallet<WalletConnectOptions> {
   constructor(config: WalletConnectWalletConfig = {}) {
     super(config);
   }
 
-  protected createConnector(): WalletConnectConnector {
-    return new WalletConnectConnector({
-      chains: this.chains,
-      options: this.connectorOptions,
-    });
+  protected createConnectorFn(): any {
+    return walletConnect(this.connectorOptions);
   }
 }

@@ -1,4 +1,4 @@
-import { InjectedConnector } from "@wagmi/core/connectors/injected";
+import { injected, Connector } from "@wagmi/core";
 import { EVMWallet, EVMWalletConfig, EVMWalletType } from "./evm";
 
 export enum InjectedWallets {
@@ -35,10 +35,7 @@ export type InjectedWalletConfig = EVMWalletConfig<InjectedWalletOptions> & {
   name?: InjectedWallets;
 };
 
-export class InjectedWallet extends EVMWallet<
-  InjectedConnector,
-  InjectedWalletOptions
-> {
+export class InjectedWallet extends EVMWallet<InjectedWalletOptions> {
   protected config: InjectedWalletConfig;
 
   constructor(config: InjectedWalletConfig = {}) {
@@ -46,14 +43,11 @@ export class InjectedWallet extends EVMWallet<
     this.config = config;
   }
 
-  createConnector(): InjectedConnector {
+  createConnectorFn(): any {
     const options = this.config.name
       ? Object.assign({}, this.connectorOptions, { name: this.config.name })
       : this.connectorOptions;
-    return new InjectedConnector({
-      chains: this.chains,
-      options,
-    });
+    return injected(options as any);
   }
 
   getName(): string {

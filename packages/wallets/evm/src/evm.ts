@@ -1,12 +1,5 @@
-import {
-  Config,
-  Connector,
-  ConnectorData,
-  PublicClient,
-  configureChains,
-  createConfig,
-} from "@wagmi/core";
-import { publicProvider } from "@wagmi/core/providers/public";
+import { Config, Connector, createConfig, getPublicClient } from "@wagmi/core";
+import { http, Transport } from "viem";
 import {
   Address,
   BaseFeatures,
@@ -112,10 +105,7 @@ class SwitchChainError extends Error {
 /**
  * @description An abstraction over EVM compatible blockchain wallets
  */
-export abstract class EVMWallet<
-  C extends Connector = Connector,
-  COpts = any
-> extends Wallet<
+export abstract class EVMWallet<COpts = any> extends Wallet<
   ChainId,
   ConnectParams,
   TransactionRequest,
@@ -130,8 +120,9 @@ export abstract class EVMWallet<
   BaseFeatures,
   EVMWalletEvents
 > {
-  protected chains: Chain[];
-  protected connector: C;
+  protected chains: readonly [Chain, ...Chain[]];
+  protected connector: any;
+  protected connectorFn: any;
   protected connectorOptions: COpts;
   protected network?: EVMNetworkInfo;
   protected config: EVMWalletConfig<COpts>;
@@ -139,19 +130,23 @@ export abstract class EVMWallet<
   private addresses: Address[] = [];
   private address?: Address;
   private autoSwitch: boolean;
-  private wagmiConfig?: Config<PublicClient>;
+  private wagmiConfig?: Config;
   private provider?: ethers.BrowserProvider;
   private switchingChain = false;
 
   constructor(config: EVMWalletConfig<COpts> = {}) {
     super();
-    this.chains = config.chains || DEFAULT_CHAINS;
+    const chains = config.chains || DEFAULT_CHAINS;
+    if (chains.length === 0) {
+      throw new Error("At least one chain must be provided");
+    }
+    this.chains = chains as unknown as readonly [Chain, ...Chain[]];
     this.autoSwitch = config.autoSwitch || false;
     this.connectorOptions = config.connectorOptions || ({} as COpts);
     this.config = config;
 
     // create here so that injected wallets can be detected before connecting
-    this.connector = this.createConnector();
+    this.connectorFn = this.createConnectorFn();
   }
 
   async connect({ chainId }: ConnectParams = {}): Promise<Address[]> {
@@ -164,13 +159,20 @@ export abstract class EVMWallet<
       }
     }
 
-    const { publicClient } = configureChains(this.chains, [publicProvider()]);
+    // Create transport configuration for each chain
+    const transports: Record<number, Transport> = {};
+    for (const chain of this.chains) {
+      transports[chain.id] = http(chain.rpcUrls.default.http[0]);
+    }
 
-    this.wagmiConfig = createConfig<PublicClient>({
-      publicClient,
-      autoConnect: false,
-      connectors: [this.connector],
+    this.wagmiConfig = createConfig({
+      chains: this.chains as any,
+      transports,
+      connectors: [this.connectorFn],
     });
+
+    // Get the actual connector instance from config
+    this.connector = this.wagmiConfig.connectors[0];
 
     await this.connector.connect({
       chainId: chainId || this.config.preferredChain,
@@ -181,19 +183,20 @@ export abstract class EVMWallet<
       "any"
     );
 
-    this.connector.on("change", this.onChange.bind(this));
-    this.connector.on("disconnect", this.onDisconnect.bind(this));
+    this.connector.emitter.on("change", this.onChange.bind(this));
+    this.connector.emitter.on("disconnect", this.onDisconnect.bind(this));
 
     this.network = await this.fetchNetworkInfo();
-    this.address = await this.connector.getAccount();
-    this.addresses = [this.address];
+    const accounts = await this.connector.getAccounts();
+    this.address = accounts[0];
+    this.addresses = accounts as Address[];
 
     this.emit("connect");
 
     return this.addresses;
   }
 
-  protected abstract createConnector(): C;
+  protected abstract createConnectorFn(): any;
 
   private async enforcePrefferedChain(): Promise<void> {
     if (!this.config.preferredChain) return;
@@ -202,7 +205,9 @@ export abstract class EVMWallet<
     let currentChain = this.getNetworkInfo()?.chainId;
     while (currentChain !== this.config.preferredChain) {
       try {
-        await this.connector.switchChain(this.config.preferredChain);
+        await this.connector.switchChain({
+          chainId: this.config.preferredChain,
+        });
         currentChain = this.getNetworkInfo()?.chainId;
       } catch (error) {
         const { code } = error as RpcError;
@@ -215,9 +220,12 @@ export abstract class EVMWallet<
     }
   }
 
-  private async onChange(data: ConnectorData) {
-    if (data.chain) await this.onChainChanged();
-    if (data.account) await this.onAccountsChanged([data.account]);
+  private async onChange(data: {
+    accounts?: readonly Address[];
+    chainId?: number;
+  }) {
+    if (data.chainId) await this.onChainChanged();
+    if (data.accounts) await this.onAccountsChanged(data.accounts as Address[]);
   }
 
   /**
@@ -317,7 +325,7 @@ export abstract class EVMWallet<
 
     try {
       this.switchingChain = true;
-      await this.connector.switchChain(ethChainId);
+      await this.connector.switchChain({ chainId: ethChainId });
       this.network = await this.fetchNetworkInfo();
     } catch (err) {
       const isChainNotAddedError =
@@ -456,13 +464,14 @@ export abstract class EVMWallet<
     // no new accounts === wallet disconnected
     if (!accounts.length) return this.disconnect();
 
-    this.address = await this.connector.getAccount();
+    const connectorAccounts = await this.connector.getAccounts();
+    this.address = connectorAccounts[0];
     this.emit("accountsChanged", accounts);
   }
 
   protected async onDisconnect(): Promise<void> {
-    this.connector.removeAllListeners();
-    await this.wagmiConfig?.destroy();
+    this.connector.emitter?.removeAllListeners();
+    // In wagmi v2, config doesn't have destroy method
     this.wagmiConfig = undefined;
     this.emit("disconnect");
   }
