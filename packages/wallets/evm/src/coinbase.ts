@@ -1,4 +1,5 @@
 import { coinbaseWallet } from "@wagmi/connectors";
+import { CreateConnectorFn } from "@wagmi/core";
 import { EVMWallet, EVMWalletConfig, EVMWalletType } from "./evm";
 
 /** Coinbase Wallet SDK Options */
@@ -38,7 +39,7 @@ export class CoinbaseWallet extends EVMWallet<CoinbaseWalletSDKOptions> {
     super(config);
   }
 
-  protected createConnectorFn(): any {
+  protected createConnectorFn(): CreateConnectorFn {
     return coinbaseWallet({
       appName: this.connectorOptions.appName,
       appLogoUrl: this.connectorOptions.appLogoUrl,

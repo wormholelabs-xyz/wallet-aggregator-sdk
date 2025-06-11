@@ -1,4 +1,10 @@
-import { Config, Connector, createConfig, getPublicClient } from "@wagmi/core";
+import {
+  Config,
+  Connector,
+  CreateConnectorFn,
+  createConfig,
+  getPublicClient,
+} from "@wagmi/core";
 import { http, Transport } from "viem";
 import {
   Address,
@@ -34,7 +40,7 @@ enum ERROR_CODES {
 }
 
 /** @description EVMWallet config options */
-export interface EVMWalletConfig<COpts = any> {
+export interface EVMWalletConfig<COpts = unknown> {
   /**
    * @description An array of evm chain config objects as defined by wagmi's Chain type.
    * While the information is the same as in the {@link https://eips.ethereum.org/EIPS/eip-3085 EIP-3085}, the structure is slightly different
@@ -105,7 +111,7 @@ class SwitchChainError extends Error {
 /**
  * @description An abstraction over EVM compatible blockchain wallets
  */
-export abstract class EVMWallet<COpts = any> extends Wallet<
+export abstract class EVMWallet<COpts = unknown> extends Wallet<
   ChainId,
   ConnectParams,
   TransactionRequest,
@@ -121,8 +127,8 @@ export abstract class EVMWallet<COpts = any> extends Wallet<
   EVMWalletEvents
 > {
   protected chains: readonly [Chain, ...Chain[]];
-  protected connector: any;
-  protected connectorFn: any;
+  protected connector!: Connector;
+  protected connectorFn: CreateConnectorFn;
   protected connectorOptions: COpts;
   protected network?: EVMNetworkInfo;
   protected config: EVMWalletConfig<COpts>;
@@ -166,7 +172,7 @@ export abstract class EVMWallet<COpts = any> extends Wallet<
     }
 
     this.wagmiConfig = createConfig({
-      chains: this.chains as any,
+      chains: this.chains,
       transports,
       connectors: [this.connectorFn],
     });
@@ -196,7 +202,7 @@ export abstract class EVMWallet<COpts = any> extends Wallet<
     return this.addresses;
   }
 
-  protected abstract createConnectorFn(): any;
+  protected abstract createConnectorFn(): CreateConnectorFn;
 
   private async enforcePrefferedChain(): Promise<void> {
     if (!this.config.preferredChain) return;
@@ -377,14 +383,18 @@ export abstract class EVMWallet<COpts = any> extends Wallet<
    */
   public async watchAsset(params: WatchAssetParams): Promise<boolean> {
     if (!this.provider) throw new NotConnected();
-    if (this.connector.watchAsset)
-      return this.connector.watchAsset(params.options);
+    // Check if connector has watchAsset method (not part of standard interface)
+    const connectorWithWatchAsset = this.connector as Connector & {
+      watchAsset?: (params: WatchAssetParams["options"]) => Promise<boolean>;
+    };
+    if (connectorWithWatchAsset.watchAsset)
+      return connectorWithWatchAsset.watchAsset(params.options);
 
     // some connectors might not have a watchAsset method, like WalletConnect,
     // but the underlying wallet it is connected to might support it
     try {
-      // ugly cast since wallet_watchAsset expects an object and not an array of parameters
-      await this.provider.send("wallet_watchAsset", params as any);
+      // wallet_watchAsset expects the params object directly, not wrapped in an array
+      await this.provider.send("wallet_watchAsset", params);
       return true;
     } catch (err) {
       return false;
@@ -470,7 +480,9 @@ export abstract class EVMWallet<COpts = any> extends Wallet<
   }
 
   protected async onDisconnect(): Promise<void> {
-    this.connector.emitter?.removeAllListeners();
+    // Remove specific listeners we added
+    this.connector.emitter?.off("change", this.onChange.bind(this));
+    this.connector.emitter?.off("disconnect", this.onDisconnect.bind(this));
     // In wagmi v2, config doesn't have destroy method
     this.wagmiConfig = undefined;
     this.emit("disconnect");

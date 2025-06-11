@@ -1,5 +1,5 @@
 import { EVMWallet, EVMWalletType } from "./evm";
-import { injected, Connector } from "@wagmi/core";
+import { injected, Connector, CreateConnectorFn } from "@wagmi/core";
 
 export class MetamaskWallet extends EVMWallet {
   getUrl(): string {
@@ -10,7 +10,7 @@ export class MetamaskWallet extends EVMWallet {
     return "Metamask";
   }
 
-  protected createConnectorFn(): any {
+  protected createConnectorFn(): CreateConnectorFn {
     return injected({ target: "metaMask" });
   }
 

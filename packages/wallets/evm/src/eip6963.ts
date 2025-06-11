@@ -1,4 +1,5 @@
-import { injected, Connector } from "@wagmi/core";
+import { injected, Connector, CreateConnectorFn } from "@wagmi/core";
+import { EIP1193Provider } from "viem";
 import { EVMWallet } from "./evm";
 import { WalletState } from "@wormhole-labs/wallet-aggregator-core";
 
@@ -9,7 +10,7 @@ type ProviderDetail = {
     rdns: string;
     uuid: string;
   };
-  provider: any;
+  provider: EIP1193Provider;
 };
 
 interface AnounceProviderEvent extends Event {
@@ -97,18 +98,21 @@ export class Eip6963Wallet extends EVMWallet<Eip6963WalletOptions> {
     }
   };
 
-  createConnectorFn(): any {
+  createConnectorFn(): CreateConnectorFn {
     window.removeEventListener(
       "eip6963:announceProvider",
       this.registerProvider
     );
     // Use injected connector with custom provider
     return injected({
-      target: () => ({
-        id: this.details.name,
-        name: this.details.name,
-        provider: this.detail?.provider,
-      }),
+      target: () => {
+        if (!this.detail?.provider) return undefined;
+        return {
+          id: this.details.name,
+          name: this.details.name,
+          provider: this.detail.provider,
+        };
+      },
     });
   }
 

@@ -1,4 +1,4 @@
-import { injected, Connector } from "@wagmi/core";
+import { injected, Connector, CreateConnectorFn } from "@wagmi/core";
 import { EVMWallet, EVMWalletConfig, EVMWalletType } from "./evm";
 
 export enum InjectedWallets {
@@ -43,11 +43,23 @@ export class InjectedWallet extends EVMWallet<InjectedWalletOptions> {
     this.config = config;
   }
 
-  createConnectorFn(): any {
-    const options = this.config.name
-      ? Object.assign({}, this.connectorOptions, { name: this.config.name })
-      : this.connectorOptions;
-    return injected(options as any);
+  createConnectorFn(): CreateConnectorFn {
+    // In wagmi v2, injected connector doesn't accept name in options
+    // If a specific wallet name is provided, try to target it
+    type TargetId = "metaMask" | "coinbaseWallet" | "okxWallet" | "rabby";
+    const targetMap: Record<string, TargetId> = {
+      [InjectedWallets.MetaMask]: "metaMask",
+      [InjectedWallets.CoinbaseWallet]: "coinbaseWallet",
+      [InjectedWallets.OKXWallet]: "okxWallet",
+      [InjectedWallets.RabbyWallet]: "rabby",
+    };
+
+    const target = this.config.name ? targetMap[this.config.name] : undefined;
+
+    return injected({
+      shimDisconnect: true,
+      ...(target && { target }),
+    });
   }
 
   getName(): string {

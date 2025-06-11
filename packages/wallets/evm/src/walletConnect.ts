@@ -1,4 +1,5 @@
 import { walletConnect } from "@wagmi/connectors";
+import { CreateConnectorFn } from "@wagmi/core";
 import { EVMWalletConfig, EVMWalletType } from "./evm";
 import { BaseWalletConnectWallet } from "./walletConnectBase";
 
@@ -12,7 +13,7 @@ export class WalletConnectWallet extends BaseWalletConnectWallet<WalletConnectOp
     super(config);
   }
 
-  protected createConnectorFn(): any {
+  protected createConnectorFn(): CreateConnectorFn {
     return walletConnect(this.connectorOptions);
   }
 }
