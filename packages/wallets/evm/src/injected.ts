@@ -1,4 +1,4 @@
-import { InjectedConnector } from "@wagmi/core/connectors/injected";
+import { injected, Connector, CreateConnectorFn } from "@wagmi/core";
 import { EVMWallet, EVMWalletConfig, EVMWalletType } from "./evm";
 
 export enum InjectedWallets {
@@ -35,10 +35,7 @@ export type InjectedWalletConfig = EVMWalletConfig<InjectedWalletOptions> & {
   name?: InjectedWallets;
 };
 
-export class InjectedWallet extends EVMWallet<
-  InjectedConnector,
-  InjectedWalletOptions
-> {
+export class InjectedWallet extends EVMWallet<InjectedWalletOptions> {
   protected config: InjectedWalletConfig;
 
   constructor(config: InjectedWalletConfig = {}) {
@@ -46,17 +43,33 @@ export class InjectedWallet extends EVMWallet<
     this.config = config;
   }
 
-  createConnector(): InjectedConnector {
-    const options = this.config.name
-      ? Object.assign({}, this.connectorOptions, { name: this.config.name })
-      : this.connectorOptions;
-    return new InjectedConnector({
-      chains: this.chains,
-      options,
+  createConnectorFn(): CreateConnectorFn {
+    // In wagmi v2, injected connector doesn't accept name in options
+    // If a specific wallet name is provided, try to target it
+    type TargetId = "metaMask" | "coinbaseWallet" | "okxWallet" | "rabby";
+    const targetMap: Record<string, TargetId> = {
+      [InjectedWallets.MetaMask]: "metaMask",
+      [InjectedWallets.CoinbaseWallet]: "coinbaseWallet",
+      [InjectedWallets.OKXWallet]: "okxWallet",
+      [InjectedWallets.RabbyWallet]: "rabby",
+    };
+
+    const target = this.config.name ? targetMap[this.config.name] : undefined;
+
+    return injected({
+      shimDisconnect: true,
+      ...(target && { target }),
     });
   }
 
   getName(): string {
+    // If connector isn't created yet (before connect), use configured name
+    if (!this.connector) {
+      return (
+        this.config.name || this.config.genericName || InjectedWallets.Generic
+      );
+    }
+
     const name = this.connector.name;
 
     // bitget shows as bitkeep for legacy reasons

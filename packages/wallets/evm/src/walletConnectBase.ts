@@ -1,10 +1,6 @@
-import { Connector } from "@wagmi/core";
 import { EVMWallet, EVMWalletType } from "./evm";
 
-export abstract class BaseWalletConnectWallet<
-  C extends Connector,
-  COpts
-> extends EVMWallet<C, COpts> {
+export abstract class BaseWalletConnectWallet<COpts> extends EVMWallet<COpts> {
   getName(): string {
     return "WalletConnect";
   }
