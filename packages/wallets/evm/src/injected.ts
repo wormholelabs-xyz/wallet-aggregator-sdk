@@ -63,6 +63,13 @@ export class InjectedWallet extends EVMWallet<InjectedWalletOptions> {
   }
 
   getName(): string {
+    // If connector isn't created yet (before connect), use configured name
+    if (!this.connector) {
+      return (
+        this.config.name || this.config.genericName || InjectedWallets.Generic
+      );
+    }
+
     const name = this.connector.name;
 
     // bitget shows as bitkeep for legacy reasons

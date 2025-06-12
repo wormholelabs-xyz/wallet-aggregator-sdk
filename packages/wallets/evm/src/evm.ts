@@ -431,9 +431,14 @@ export abstract class EVMWallet<COpts = unknown> extends Wallet<
   }
 
   getWalletState(): WalletState {
-    return this.connector.ready
-      ? WalletState.Loadable
-      : WalletState.NotDetected;
+    // If connector hasn't been created yet, it's not detected
+    if (!this.connector) {
+      return WalletState.NotDetected;
+    }
+
+    // In wagmi v2, connectors are always "loadable" once created
+    // The actual detection happens during the connector creation
+    return WalletState.Loadable;
   }
 
   async getBalance(assetAddress?: string): Promise<string> {
