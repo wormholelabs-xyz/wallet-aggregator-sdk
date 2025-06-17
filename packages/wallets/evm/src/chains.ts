@@ -6,7 +6,6 @@ export * from "@wagmi/core/chains";
 const acala = {
   id: 787,
   name: "Acala",
-  network: "acala",
   nativeCurrency: { name: "Acala Token", symbol: "ACA", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://eth-rpc-acala.aca-api.network"] },
@@ -20,7 +19,6 @@ const acala = {
 const acalaTestnet = {
   id: 597,
   name: "Acala Testnet",
-  network: "acala-testnet",
   nativeCurrency: { name: "Acala Token", symbol: "ACA", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://acala-dev.aca-dev.network/eth/http"] },
@@ -37,7 +35,6 @@ const acalaTestnet = {
 const karura = {
   id: 686,
   name: "Karura",
-  network: "karura",
   nativeCurrency: { name: "Karura Token", symbol: "KAR", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://eth-rpc-karura.aca-api.network"] },
@@ -51,7 +48,6 @@ const karura = {
 const karuraTestnet = {
   id: 596,
   name: "Karura Testnet",
-  network: "karura-testnet",
   nativeCurrency: { name: "Karura Token", symbol: "KAR", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://karura-dev.aca-dev.network/eth/http"] },
@@ -68,7 +64,6 @@ const karuraTestnet = {
 export const emerald = {
   id: 42262,
   name: "Emerald Paratime Mainnet",
-  network: "emerald-testnet",
   nativeCurrency: { name: "Emerald Rose", symbol: "ROSE", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://emerald.oasis.dev"] },
@@ -82,7 +77,6 @@ export const emerald = {
 export const emeraldTestnet = {
   id: 42261,
   name: "Emerald Paratime Testnet",
-  network: "emerald-testnet",
   nativeCurrency: { name: "Emerald Rose", symbol: "ROSE", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://testnet.emerald.oasis.dev"] },
@@ -100,7 +94,6 @@ export const emeraldTestnet = {
 export const blast = {
   id: 81457,
   name: "Blast Mainnet",
-  network: "blast-mainnet",
   nativeCurrency: { name: "Blast Ethereum", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://rpc.blast.io"] },
@@ -117,7 +110,6 @@ export const blast = {
 export const blastSepolia = {
   id: 168587773,
   name: "Blast Sepolia",
-  network: "blast-repolia",
   nativeCurrency: { name: "Blast Ethereum", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://sepolia.blast.io"] },
@@ -134,7 +126,6 @@ export const blastSepolia = {
 export const scroll = {
   id: 534_352,
   name: "Scroll",
-  network: "scroll",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -155,7 +146,6 @@ export const scroll = {
 export const scrollSepolia = {
   id: 534_351,
   name: "Scroll Sepolia",
-  network: "scroll-sepolia",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -177,7 +167,6 @@ export const scrollSepolia = {
 export const xlayer = {
   id: 196,
   name: "X Layer",
-  network: "xlayer-mainnet",
   nativeCurrency: { name: "OKB", symbol: "OKB", decimals: 18 },
   rpcUrls: {
     default: {
@@ -198,7 +187,6 @@ export const xlayer = {
 export const xlayerTestnet = {
   id: 195,
   name: "X Layer Testnet",
-  network: "xlayer-testnet",
   nativeCurrency: { name: "OKB", symbol: "OKB", decimals: 18 },
   rpcUrls: {
     default: {
@@ -220,7 +208,6 @@ export const xlayerTestnet = {
 export const mantle = {
   id: 5000,
   name: "Mantle",
-  network: "mantle",
   nativeCurrency: { name: "MNT", symbol: "MNT", decimals: 18 },
   rpcUrls: {
     default: {
@@ -241,7 +228,6 @@ export const mantle = {
 export const mantleTestnet = {
   id: 5000,
   name: "Mantle",
-  network: "mantle-testnet",
   nativeCurrency: { name: "MNT", symbol: "MNT", decimals: 18 },
   rpcUrls: {
     default: {
@@ -262,7 +248,6 @@ export const mantleTestnet = {
 export const worldchain = {
   id: 480,
   name: "World Chain",
-  network: "worldchain",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -283,7 +268,6 @@ export const worldchain = {
 export const worldchainTestnet = {
   id: 4801,
   name: "World Chain",
-  network: "worldchain-sepolia",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -305,7 +289,6 @@ export const worldchainTestnet = {
 export const unichain = {
   id: 130,
   name: "Unichain",
-  network: "unichain",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -326,7 +309,6 @@ export const unichain = {
 export const unichainTestnet = {
   id: 1301,
   name: "Unichain Sepolia",
-  network: "unichain-sepolia",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -348,7 +330,6 @@ export const unichainTestnet = {
 export const monadTestnet = {
   id: 10143,
   name: "Monad Testnet",
-  network: "monad-testnet",
   nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
   rpcUrls: {
     default: {
@@ -367,7 +348,7 @@ export const monadTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
-export const DEFAULT_CHAINS: Chain[] = [
+export const DEFAULT_CHAINS = [
   ...Object.values(CHAINS),
   acala,
   acalaTestnet,
@@ -388,4 +369,4 @@ export const DEFAULT_CHAINS: Chain[] = [
   unichain,
   unichainTestnet,
   monadTestnet,
-];
+] as const satisfies readonly Chain[];

@@ -1,4 +1,5 @@
-import { InjectedConnector } from "@wagmi/core";
+import { injected, Connector, CreateConnectorFn } from "@wagmi/core";
+import { EIP1193Provider } from "viem";
 import { EVMWallet } from "./evm";
 import { WalletState } from "@wormhole-labs/wallet-aggregator-core";
 
@@ -9,32 +10,20 @@ type ProviderDetail = {
     rdns: string;
     uuid: string;
   };
-  provider: any;
+  provider: EIP1193Provider;
 };
 
-type AnounceProvider = {
+interface AnounceProviderEvent extends Event {
   detail: ProviderDetail;
-};
+}
 
 type Eip6963WalletOptions = {
   name: string;
 };
 
-declare global {
-  interface WindowEventMap {
-    "eip6963:announceProvider": AnounceProvider;
-  }
-}
+// Event type declaration - may already be declared elsewhere
 
-class Eip6963Connector extends InjectedConnector {
-  constructor(readonly wallet: Eip6963Wallet, options: any) {
-    super(options);
-  }
-
-  getProvider() {
-    return this.wallet.detail?.provider;
-  }
-}
+// Custom connector is created inline in the createConnectorFn method
 
 /**
  * Add a new entry to support a new wallet
@@ -79,10 +68,7 @@ interface WalletDetails {
   icon: string;
 }
 
-export class Eip6963Wallet extends EVMWallet<
-  Eip6963Connector,
-  Eip6963WalletOptions
-> {
+export class Eip6963Wallet extends EVMWallet<Eip6963WalletOptions> {
   detail: ProviderDetail | null = null;
 
   private details: WalletDetails;
@@ -104,21 +90,29 @@ export class Eip6963Wallet extends EVMWallet<
     window.dispatchEvent(new Event("eip6963:requestProvider"));
   }
 
-  registerProvider = (event: AnounceProvider) => {
-    if (event.detail?.info?.name === this.name) {
-      this.detail = event.detail;
-      this.createConnector();
+  registerProvider = (event: Event) => {
+    const announceEvent = event as AnounceProviderEvent;
+    if (announceEvent.detail?.info?.name === this.name) {
+      this.detail = announceEvent.detail;
+      this.createConnectorFn();
     }
   };
 
-  createConnector() {
+  createConnectorFn(): CreateConnectorFn {
     window.removeEventListener(
       "eip6963:announceProvider",
       this.registerProvider
     );
-    return new Eip6963Connector(this, {
-      chains: this.chains,
-      options: this.connectorOptions,
+    // Use injected connector with custom provider
+    return injected({
+      target: () => {
+        if (!this.detail?.provider) return undefined;
+        return {
+          id: this.details.name,
+          name: this.details.name,
+          provider: this.detail.provider,
+        };
+      },
     });
   }
 
@@ -135,8 +129,6 @@ export class Eip6963Wallet extends EVMWallet<
   }
 
   getWalletState(): WalletState {
-    return this.detail && this.connector.ready
-      ? WalletState.Loadable
-      : WalletState.NotDetected;
+    return this.detail ? WalletState.Loadable : WalletState.NotDetected;
   }
 }

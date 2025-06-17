@@ -1,49 +1,12 @@
-import { WalletConnectLegacyConnector } from "@wagmi/core/connectors/walletConnectLegacy";
-import { EVMWalletConfig } from "./evm";
-import { BaseWalletConnectWallet } from "./walletConnectBase";
+// WalletConnect Legacy is no longer supported in wagmi v2
+// This file is kept for backward compatibility but won't work with wagmi v2
 
-type WalletConnectLegacyOptions = ConstructorParameters<
-  typeof WalletConnectLegacyConnector
->[0]["options"];
-
-export type WalletConnectLegacyWalletConfig =
-  EVMWalletConfig<WalletConnectLegacyOptions>;
-
-export class WalletConnectLegacyWallet extends BaseWalletConnectWallet<
-  WalletConnectLegacyConnector,
-  WalletConnectLegacyOptions
-> {
-  constructor(config: WalletConnectLegacyWalletConfig = {}) {
-    super(config);
-  }
-
-  protected createConnector(): WalletConnectLegacyConnector {
-    const options = Object.assign(
-      {
-        storageId: "wallet-aggregator-sdk-evm-walletconnect-legacy",
-      },
-      this.connectorOptions
+// Re-export types for backward compatibility
+export type WalletConnectLegacyWalletConfig = Record<string, unknown>;
+export class WalletConnectLegacyWallet {
+  constructor(config: WalletConnectLegacyWalletConfig) {
+    throw new Error(
+      "WalletConnect Legacy is not supported in wagmi v2. Please use WalletConnect v2 instead."
     );
-
-    return new WalletConnectLegacyConnector({
-      chains: this.chains,
-      options,
-    });
-  }
-
-  async connect(): Promise<string[]> {
-    const accounts = await super.connect();
-
-    // hacky fix: when no preferred chain is set, the provider will not configure an http/rpc endpoint
-    // only when changing the network, it'll detect it through the networkChanged event and configure
-    // it accordingly
-    if (this.network?.chainId) {
-      // @eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const innerProvider = (await this.connector.getProvider()) as any;
-      // @eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      innerProvider.http = innerProvider.setHttpProvider(this.network.chainId);
-    }
-
-    return accounts;
   }
 }
