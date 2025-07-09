@@ -3,6 +3,7 @@ import {
   Connector,
   CreateConnectorFn,
   createConfig,
+  createStorage,
   getPublicClient,
 } from "@wagmi/core";
 import { http, Transport } from "viem";
@@ -165,32 +166,49 @@ export abstract class EVMWallet<COpts = unknown> extends Wallet<
       }
     }
 
-    // Create transport configuration for each chain
-    const transports: Record<number, Transport> = {};
-    for (const chain of this.chains) {
-      transports[chain.id] = http(chain.rpcUrls.default.http[0]);
+    // Only create config if it doesn't exist
+    if (!this.wagmiConfig) {
+      // Create transport configuration for each chain
+      const transports: Record<number, Transport> = {};
+      for (const chain of this.chains) {
+        transports[chain.id] = http(chain.rpcUrls.default.http[0]);
+      }
+
+      this.wagmiConfig = createConfig({
+        chains: this.chains,
+        transports,
+        connectors: [this.connectorFn],
+        storage: createStorage({
+          storage:
+            typeof window !== "undefined" ? window.localStorage : undefined,
+        }),
+      });
+
+      // Get the actual connector instance from config
+      this.connector = this.wagmiConfig.connectors[0];
     }
 
-    this.wagmiConfig = createConfig({
-      chains: this.chains,
-      transports,
-      connectors: [this.connectorFn],
-    });
+    // Check if already connected
+    const isConnected = this.connector.getAccounts
+      ? (await this.connector.getAccounts()).length > 0
+      : false;
 
-    // Get the actual connector instance from config
-    this.connector = this.wagmiConfig.connectors[0];
-
-    await this.connector.connect({
-      chainId: chainId || this.config.preferredChain,
-    });
+    if (!isConnected) {
+      await this.connector.connect({
+        chainId: chainId || this.config.preferredChain,
+      });
+    }
 
     this.provider = new ethers.BrowserProvider(
       (await this.connector.getProvider()) as ethers.Eip1193Provider,
       "any"
     );
 
-    this.connector.emitter.on("change", this.onChange.bind(this));
-    this.connector.emitter.on("disconnect", this.onDisconnect.bind(this));
+    // Only add listeners if not already connected (to avoid duplicates)
+    if (!isConnected) {
+      this.connector.emitter.on("change", this.onChange.bind(this));
+      this.connector.emitter.on("disconnect", this.onDisconnect.bind(this));
+    }
 
     this.network = await this.fetchNetworkInfo();
     const accounts = await this.connector.getAccounts();
