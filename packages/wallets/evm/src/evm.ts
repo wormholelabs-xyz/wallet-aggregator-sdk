@@ -450,7 +450,7 @@ export abstract class EVMWallet<COpts = unknown> extends Wallet<
 
   getWalletState(): WalletState {
     // If connector hasn't been created yet, it's not detected
-    if (!this.connector) {
+    if (!this.connector && !this.connectorFn) {
       return WalletState.NotDetected;
     }
 
