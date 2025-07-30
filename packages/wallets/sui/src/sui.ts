@@ -72,8 +72,7 @@ export class SuiWallet extends Wallet<
   SuiSignMessageInput,
   SuiSignMessageOutput,
   SuiNetworkInfo,
-  BaseFeatures,
-  WalletEvents
+  BaseFeatures
 > {
   private readonly _name;
   private accounts: WalletAccount[] = [];
