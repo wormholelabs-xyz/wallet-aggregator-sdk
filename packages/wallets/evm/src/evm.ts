@@ -124,8 +124,7 @@ export abstract class EVMWallet<COpts = unknown> extends Wallet<
   EthereumMessage,
   Signature,
   EVMNetworkInfo,
-  BaseFeatures,
-  EVMWalletEvents
+  BaseFeatures
 > {
   protected chains: readonly [Chain, ...Chain[]];
   protected connector!: Connector;
