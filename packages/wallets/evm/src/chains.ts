@@ -348,6 +348,48 @@ export const monadTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
+export const mezo = {
+  id: 31612,
+  name: "Mezo",
+  nativeCurrency: { name: "BTC", symbol: "BTC", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://jsonrpc-mezo.boar.network"],
+    },
+    public: {
+      http: ["https://jsonrpc-mezo.boar.network"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Mezo Explorer",
+      url: "https://explorer.mezo.org/",
+    },
+  },
+  testnet: false,
+} as const satisfies Chain;
+
+export const mezoTestnet = {
+  id: 31611,
+  name: "Mezo Testnet",
+  nativeCurrency: { name: "BTC", symbol: "BTC", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.test.mezo.org"],
+    },
+    public: {
+      http: ["https://rpc.test.mezo.org"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Mezo Explorer",
+      url: "https://explorer.test.mezo.org/",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
 export const DEFAULT_CHAINS = [
   ...Object.values(CHAINS),
   acala,
@@ -369,4 +411,6 @@ export const DEFAULT_CHAINS = [
   unichain,
   unichainTestnet,
   monadTestnet,
+  mezo,
+  mezoTestnet,
 ] as const satisfies readonly Chain[];
