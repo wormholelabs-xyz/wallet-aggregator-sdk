@@ -3,7 +3,7 @@ import { Chain } from "@wagmi/core/chains";
 
 export * from "@wagmi/core/chains";
 
-const acala = {
+const ACALA = {
   id: 787,
   name: "Acala",
   nativeCurrency: { name: "Acala Token", symbol: "ACA", decimals: 18 },
@@ -16,7 +16,7 @@ const acala = {
   },
 } as const satisfies Chain;
 
-const acalaTestnet = {
+const ACALA_TESTNET = {
   id: 597,
   name: "Acala Testnet",
   nativeCurrency: { name: "Acala Token", symbol: "ACA", decimals: 18 },
@@ -32,7 +32,7 @@ const acalaTestnet = {
   },
 } as const satisfies Chain;
 
-const karura = {
+const KARURA = {
   id: 686,
   name: "Karura",
   nativeCurrency: { name: "Karura Token", symbol: "KAR", decimals: 18 },
@@ -45,7 +45,7 @@ const karura = {
   },
 } as const satisfies Chain;
 
-const karuraTestnet = {
+const KARURA_TESTNET = {
   id: 596,
   name: "Karura Testnet",
   nativeCurrency: { name: "Karura Token", symbol: "KAR", decimals: 18 },
@@ -61,7 +61,7 @@ const karuraTestnet = {
   },
 } as const satisfies Chain;
 
-export const emerald = {
+export const EMERALD = {
   id: 42262,
   name: "Emerald Paratime Mainnet",
   nativeCurrency: { name: "Emerald Rose", symbol: "ROSE", decimals: 18 },
@@ -74,7 +74,7 @@ export const emerald = {
   },
 } as const satisfies Chain;
 
-export const emeraldTestnet = {
+export const EMERALD_TESTNET = {
   id: 42261,
   name: "Emerald Paratime Testnet",
   nativeCurrency: { name: "Emerald Rose", symbol: "ROSE", decimals: 18 },
@@ -90,14 +90,13 @@ export const emeraldTestnet = {
   },
 } as const satisfies Chain;
 
-// https://docs.blast.io/building/network-information
-export const blast = {
+export const BLAST = {
   id: 81457,
   name: "Blast Mainnet",
   nativeCurrency: { name: "Blast Ethereum", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://rpc.blast.io"] },
-    public: { http: ["	https://rpc.blast.io"] },
+    public: { http: ["https://rpc.blast.io"] },
   },
   blockExplorers: {
     default: {
@@ -107,7 +106,7 @@ export const blast = {
   },
 } as const satisfies Chain;
 
-export const blastSepolia = {
+export const BLAST_SEPOLIA = {
   id: 168587773,
   name: "Blast Sepolia",
   nativeCurrency: { name: "Blast Ethereum", symbol: "ETH", decimals: 18 },
@@ -123,7 +122,7 @@ export const blastSepolia = {
   },
 } as const satisfies Chain;
 
-export const scroll = {
+export const SCROLL = {
   id: 534_352,
   name: "Scroll",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
@@ -143,7 +142,7 @@ export const scroll = {
   },
 } as const satisfies Chain;
 
-export const scrollSepolia = {
+export const SCROLL_SEPOLIA = {
   id: 534_351,
   name: "Scroll Sepolia",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
@@ -164,7 +163,7 @@ export const scrollSepolia = {
   testnet: true,
 } as const satisfies Chain;
 
-export const xlayer = {
+export const XLAYER = {
   id: 196,
   name: "X Layer",
   nativeCurrency: { name: "OKB", symbol: "OKB", decimals: 18 },
@@ -184,7 +183,7 @@ export const xlayer = {
   },
 } as const satisfies Chain;
 
-export const xlayerTestnet = {
+export const XLAYER_TESTNET = {
   id: 195,
   name: "X Layer Testnet",
   nativeCurrency: { name: "OKB", symbol: "OKB", decimals: 18 },
@@ -205,7 +204,7 @@ export const xlayerTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
-export const mantle = {
+export const MANTLE = {
   id: 5000,
   name: "Mantle",
   nativeCurrency: { name: "MNT", symbol: "MNT", decimals: 18 },
@@ -225,9 +224,9 @@ export const mantle = {
   },
 } as const satisfies Chain;
 
-export const mantleTestnet = {
-  id: 5000,
-  name: "Mantle",
+export const MANTLE_TESTNET = {
+  id: 5001,
+  name: "Mantle Testnet",
   nativeCurrency: { name: "MNT", symbol: "MNT", decimals: 18 },
   rpcUrls: {
     default: {
@@ -243,9 +242,10 @@ export const mantleTestnet = {
       url: "https://explorer.testnet.mantle.xyz",
     },
   },
+  testnet: true,
 } as const satisfies Chain;
 
-export const worldchain = {
+export const WORLDCHAIN = {
   id: 480,
   name: "World Chain",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
@@ -265,9 +265,9 @@ export const worldchain = {
   },
 } as const satisfies Chain;
 
-export const worldchainTestnet = {
+export const WORLDCHAIN_TESTNET = {
   id: 4801,
-  name: "World Chain",
+  name: "World Chain Testnet",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -286,7 +286,7 @@ export const worldchainTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
-export const unichain = {
+export const UNICHAIN = {
   id: 130,
   name: "Unichain",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
@@ -306,7 +306,7 @@ export const unichain = {
   },
 } as const satisfies Chain;
 
-export const unichainTestnet = {
+export const UNICHAIN_TESTNET = {
   id: 1301,
   name: "Unichain Sepolia",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
@@ -327,7 +327,7 @@ export const unichainTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
-export const monadTestnet = {
+export const MONAD_TESTNET = {
   id: 10143,
   name: "Monad Testnet",
   nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
@@ -348,7 +348,7 @@ export const monadTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
-export const mezo = {
+export const MEZO = {
   id: 31612,
   name: "Mezo",
   nativeCurrency: { name: "BTC", symbol: "BTC", decimals: 18 },
@@ -369,7 +369,7 @@ export const mezo = {
   testnet: false,
 } as const satisfies Chain;
 
-export const mezoTestnet = {
+export const MEZO_TESTNET = {
   id: 31611,
   name: "Mezo Testnet",
   nativeCurrency: { name: "BTC", symbol: "BTC", decimals: 18 },
@@ -390,7 +390,7 @@ export const mezoTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
-export const xrplevmTestnet = {
+export const XRPLEVM_TESTNET = {
   id: 1449000,
   name: "XRPL EVM Testnet",
   nativeCurrency: { name: "XRP", symbol: "XRP", decimals: 18 },
@@ -411,7 +411,7 @@ export const xrplevmTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
-export const xrplevmMainnet = {
+export const XRPLEVM = {
   id: 1440000,
   name: "XRPL EVM Mainnet",
   nativeCurrency: { name: "XRP", symbol: "XRP", decimals: 18 },
@@ -432,7 +432,7 @@ export const xrplevmMainnet = {
   testnet: false,
 } as const satisfies Chain;
 
-export const hyperEvm = {
+export const HYPER_EVM = {
   id: 999,
   name: "HyperEVM",
   nativeCurrency: { name: "HYPE", symbol: "HYPE", decimals: 18 },
@@ -455,27 +455,28 @@ export const hyperEvm = {
 
 export const DEFAULT_CHAINS = [
   ...Object.values(CHAINS),
-  acala,
-  acalaTestnet,
-  blast,
-  blastSepolia,
-  emerald,
-  emeraldTestnet,
-  karura,
-  karuraTestnet,
-  scroll,
-  scrollSepolia,
-  xlayer,
-  xlayerTestnet,
-  mantle,
-  mantleTestnet,
-  worldchain,
-  worldchainTestnet,
-  unichain,
-  unichainTestnet,
-  monadTestnet,
-  mezo,
-  mezoTestnet,
-  xrplevmMainnet,
-  xrplevmTestnet,
+  ACALA,
+  ACALA_TESTNET,
+  BLAST,
+  BLAST_SEPOLIA,
+  EMERALD,
+  EMERALD_TESTNET,
+  KARURA,
+  KARURA_TESTNET,
+  SCROLL,
+  SCROLL_SEPOLIA,
+  XLAYER,
+  XLAYER_TESTNET,
+  MANTLE,
+  MANTLE_TESTNET,
+  WORLDCHAIN,
+  WORLDCHAIN_TESTNET,
+  UNICHAIN,
+  UNICHAIN_TESTNET,
+  MONAD_TESTNET,
+  MEZO,
+  MEZO_TESTNET,
+  XRPLEVM,
+  XRPLEVM_TESTNET,
+  HYPER_EVM,
 ] as const satisfies readonly Chain[];
