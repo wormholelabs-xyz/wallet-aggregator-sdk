@@ -390,6 +390,69 @@ export const mezoTestnet = {
   testnet: true,
 } as const satisfies Chain;
 
+export const xrplevmTestnet = {
+  id: 1449000,
+  name: "XRPL EVM Testnet",
+  nativeCurrency: { name: "XRP", symbol: "XRP", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.testnet.xrplevm.org"],
+    },
+    public: {
+      http: ["https://rpc.testnet.xrplevm.org"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "XRPL EVM Explorer",
+      url: "https://explorer.testnet.xrplevm.org/",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
+export const xrplevmMainnet = {
+  id: 1440000,
+  name: "XRPL EVM Mainnet",
+  nativeCurrency: { name: "XRP", symbol: "XRP", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.mainnet.xrplevm.org"],
+    },
+    public: {
+      http: ["https://rpc.mainnet.xrplevm.org"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "XRPL EVM Explorer",
+      url: "https://explorer.mainnet.xrplevm.org/",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
+export const hyperEvm = {
+  id: 999,
+  name: "HyperEVM",
+  nativeCurrency: { name: "HYPE", symbol: "HYPE", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.hyperliquid.xyz/evm"],
+    },
+    public: {
+      http: ["https://rpc.hyperliquid.xyz/evm"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "HyperEVMScan",
+      url: "https://hyperevmscan.io/",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
 export const DEFAULT_CHAINS = [
   ...Object.values(CHAINS),
   acala,
@@ -413,4 +476,6 @@ export const DEFAULT_CHAINS = [
   monadTestnet,
   mezo,
   mezoTestnet,
+  xrplevmMainnet,
+  xrplevmTestnet,
 ] as const satisfies readonly Chain[];
