@@ -429,7 +429,7 @@ export const xrplevmMainnet = {
       url: "https://explorer.mainnet.xrplevm.org/",
     },
   },
-  testnet: true,
+  testnet: false,
 } as const satisfies Chain;
 
 export const hyperEvm = {
@@ -450,7 +450,7 @@ export const hyperEvm = {
       url: "https://hyperevmscan.io/",
     },
   },
-  testnet: true,
+  testnet: false,
 } as const satisfies Chain;
 
 export const DEFAULT_CHAINS = [
