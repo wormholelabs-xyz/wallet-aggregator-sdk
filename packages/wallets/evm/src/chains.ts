@@ -417,10 +417,10 @@ export const XRPLEVM = {
   nativeCurrency: { name: "XRP", symbol: "XRP", decimals: 18 },
   rpcUrls: {
     default: {
-      http: ["https://rpc.mainnet.xrplevm.org"],
+      http: ["https://rpc.xrplevm.org"],
     },
     public: {
-      http: ["https://rpc.mainnet.xrplevm.org"],
+      http: ["https://rpc.xrplevm.org"],
     },
   },
   blockExplorers: {
