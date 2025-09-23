@@ -432,6 +432,27 @@ export const XRPLEVM = {
   testnet: false,
 } as const satisfies Chain;
 
+export const PLUME = {
+  id: 98866,
+  name: "Plume",
+  nativeCurrency: { name: "Plume", symbol: "PLUME", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.plume.org"],
+    },
+    public: {
+      http: ["https://rpc.plume.org"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Plume Explorer",
+      url: "https://explorer.plume.org/",
+    },
+  },
+  testnet: false,
+} as const satisfies Chain;
+
 export const HYPER_EVM = {
   id: 999,
   name: "HyperEVM",
@@ -478,5 +499,6 @@ export const DEFAULT_CHAINS = [
   MEZO_TESTNET,
   XRPLEVM,
   XRPLEVM_TESTNET,
+  PLUME,
   HYPER_EVM,
 ] as const satisfies readonly Chain[];
