@@ -1,0 +1,47 @@
+name: Publish to NPM
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish"
+        required: true
+        type: "string"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
+      - run: pnpm install --frozen-lockfile
+      - run: |
+          # Update the version in all package.json files
+          pnpm run version ${{ inputs.version }}
+      - run: pnpm run build
+      - run: |
+          VERSION="${{ inputs.version }}"
+
+          if [[ $VERSION == *"beta"* ]]; then
+            tag=beta
+          elif [[ $VERSION == *"alpha"* ]]; then
+            tag=alpha
+          else
+            tag=latest
+          fi
+
+          pnpm publish -r --access public --tag $tag --no-git-checks
+
+        env:
+          VERSION: ${{ inputs.version }}
