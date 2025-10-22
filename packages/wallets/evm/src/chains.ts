@@ -327,6 +327,27 @@ export const UNICHAIN_TESTNET = {
   testnet: true,
 } as const satisfies Chain;
 
+export const MONAD = {
+  id: 143,
+  name: "Monad",
+  nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.monad.xyz"],
+    },
+    public: {
+      http: ["https://rpc.monad.xyz"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Monad Explorer",
+      url: "https://monadexplorer.com",
+    },
+  },
+  testnet: false,
+} as const satisfies Chain;
+
 export const MONAD_TESTNET = {
   id: 10143,
   name: "Monad Testnet",
@@ -341,8 +362,8 @@ export const MONAD_TESTNET = {
   },
   blockExplorers: {
     default: {
-      name: "Oasis",
-      url: "https://testnet.explorer.oasis.dev",
+      name: "Monad Explorer",
+      url: "https://testnet.monadexplorer.com",
     },
   },
   testnet: true,
@@ -494,6 +515,7 @@ export const DEFAULT_CHAINS = [
   WORLDCHAIN_TESTNET,
   UNICHAIN,
   UNICHAIN_TESTNET,
+  MONAD,
   MONAD_TESTNET,
   MEZO,
   MEZO_TESTNET,
