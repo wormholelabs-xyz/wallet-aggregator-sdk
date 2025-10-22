@@ -28,6 +28,7 @@ export const EVM_CHAINS = {
   mantle: 5000,
   worldchain: 480,
   unichain: 130,
+  monad: 143,
 } as const;
 
 export const EVM_CHAINS_TESTNET = {
@@ -91,11 +92,10 @@ const invertMap = <K extends Indexable, V extends Indexable>(
     return Object.assign(obj, { [id as Indexable]: name });
   }, {} as Record<V, K>);
 
-// TODO: remove "monad" when mainnet is launched
-export type MainnnetEVMChainName = Exclude<EVMChainName, "monad">;
-
-export const EVM_CHAIN_ID_TO_NAME: Record<number, MainnnetEVMChainName> =
-  invertMap<MainnnetEVMChainName, number>(EVM_CHAINS);
+export const EVM_CHAIN_ID_TO_NAME: Record<number, EVMChainName> = invertMap<
+  EVMChainName,
+  number
+>(EVM_CHAINS);
 export const EVM_TESTNET_CHAIN_ID_TO_NAME: Record<number, EVMChainName> =
   invertMap(EVM_CHAINS_TESTNET);
 
