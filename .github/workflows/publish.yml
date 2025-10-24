@@ -1,19 +1,15 @@
 name: Publish to NPM
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version to publish"
-        required: true
-        type: "string"
+  release:
+    types: [published]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write # Required for OIDC authentication with npm
 
     steps:
       - uses: actions/checkout@v5
@@ -25,23 +21,27 @@ jobs:
           node-version: 24
           cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
+          # Node 24 ships with npm 11.x which includes OIDC support (requires 11.5.1+)
       - run: pnpm install --frozen-lockfile
       - run: |
-          # Update the version in all package.json files
-          pnpm run version ${{ inputs.version }}
+          version="$GITHUB_REF_NAME"
+
+          # Sync version number to all package.json files
+          pnpm run version $version
       - run: pnpm run build
       - run: |
-          VERSION="${{ inputs.version }}"
+          version="$GITHUB_REF_NAME"
 
-          if [[ $VERSION == *"beta"* ]]; then
+          if [[ $version == *"beta"* ]]; then
             tag=beta
-          elif [[ $VERSION == *"alpha"* ]]; then
+          elif [[ $version == *"alpha"* ]]; then
             tag=alpha
           else
             tag=latest
           fi
 
           pnpm publish -r --access public --tag $tag --no-git-checks
-
-        env:
-          VERSION: ${{ inputs.version }}
+        # OIDC authentication is used automatically by npm CLI 11.5.1+
+        # (pnpm delegates to npm for publishing)
+        # No NPM_TOKEN secret needed - authentication happens via OpenID Connect
+        # See: https://docs.npmjs.com/trusted-publishers/

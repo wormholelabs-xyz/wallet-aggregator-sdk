@@ -1,7 +1,7 @@
 {
   "name": "@wormhole-labs/wallet-aggregator-xpla",
   "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/xpla",
-  "version": "0.0.1",
+  "version": "0.0.0-auto-managed",
   "sideEffects": false,
   "license": "MIT",
   "main": "dist/cjs/index.js",
