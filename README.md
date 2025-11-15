@@ -4,18 +4,18 @@ This is a fork of the original [XLabs/wallet-aggregator-sdk](https://github.com/
 
 A library to transparently interact with multiple blockchains
 
-`pnpm` is used to manage the project. To install, simply clone the repo and run:
+`bun` is used to manage the project. To install, simply clone the repo and run:
 
 #### Setup
 
 ```bash
-$ pnpm install
+$ bun install
 ```
 
 #### Building
 
 ```bash
-$ pnpm run build
+$ bun run build
 ```
 
 ### Packages

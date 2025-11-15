@@ -13,20 +13,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.1
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
           # Node 24 ships with npm 11.x which includes OIDC support (requires 11.5.1+)
-      - run: pnpm install --frozen-lockfile
+      - run: bun install --frozen-lockfile
       - run: |
           version="$GITHUB_REF_NAME"
 
           # Sync version number to all package.json files
-          pnpm run version $version
-      - run: pnpm run build
+          bun run version $version
+      - run: bun run build
       - run: |
           version="$GITHUB_REF_NAME"
 
@@ -38,8 +39,8 @@ jobs:
             tag=latest
           fi
 
-          pnpm publish -r --access public --tag $tag --no-git-checks
+          # Bun doesn't support workspace publishing yet, so we use npm
+          npm publish --workspaces --access public --tag $tag --no-git-checks
         # OIDC authentication is used automatically by npm CLI 11.5.1+
-        # (pnpm delegates to npm for publishing)
         # No NPM_TOKEN secret needed - authentication happens via OpenID Connect
         # See: https://docs.npmjs.com/trusted-publishers/
