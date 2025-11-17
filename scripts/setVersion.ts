@@ -32,11 +32,11 @@ function updateVersionsInWorkspace(version: string) {
   // Update root package.json
   updateVersionInPackageJson(dir, version);
 
-  // Read pnpm-workspace.yaml to get workspace patterns
-  const workspaceConfigPath = path.join(dir, "pnpm-workspace.yaml");
+  // Read bun workspace configuration from package.json
+  const workspaceConfigPath = path.join(dir, "package.json");
 
   if (!fs.existsSync(workspaceConfigPath)) {
-    throw new Error("pnpm-workspace.yaml not found");
+    throw new Error("package.json not found");
   }
 
   // For this repo, we know the patterns are 'packages/*' and 'packages/wallets/*'

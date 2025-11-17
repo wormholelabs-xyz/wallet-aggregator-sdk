@@ -30,11 +30,5 @@
   },
   "dependencies": {
     "@wormhole-labs/wallet-aggregator-core": "workspace:^"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "^17.0.0",
-      "@types/react-dom": "17.0.0"
-    }
   }
 }

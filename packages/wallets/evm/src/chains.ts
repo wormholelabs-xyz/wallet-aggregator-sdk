@@ -495,7 +495,7 @@ export const HYPER_EVM = {
   testnet: false,
 } as const satisfies Chain;
 
-export const DEFAULT_CHAINS = [
+export const DEFAULT_CHAINS: readonly Chain[] = [
   ...Object.values(CHAINS),
   ACALA,
   ACALA_TESTNET,
