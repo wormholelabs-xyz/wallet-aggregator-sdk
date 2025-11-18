@@ -495,6 +495,27 @@ export const HYPER_EVM = {
   testnet: false,
 } as const satisfies Chain;
 
+export const MOCA_TESTNET = {
+  id: 222888,
+  name: "Moca",
+  nativeCurrency: { name: "MOCA", symbol: "MOCA", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://testnet-rpc.mocachain.org/"],
+    },
+    public: {
+      http: ["https://testnet-rpc.mocachain.org/"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Moca Chain Explorer",
+      url: "https://testnet-scan.mocachain.org/",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
 export const DEFAULT_CHAINS: readonly Chain[] = [
   ...Object.values(CHAINS),
   ACALA,
@@ -523,4 +544,5 @@ export const DEFAULT_CHAINS: readonly Chain[] = [
   XRPLEVM_TESTNET,
   PLUME,
   HYPER_EVM,
+  MOCA_TESTNET,
 ] as const satisfies readonly Chain[];
