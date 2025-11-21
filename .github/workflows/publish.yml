@@ -24,11 +24,11 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: |
           version="$GITHUB_REF_NAME"
-
           # Sync version number to all package.json files
           bun run version $version
       - run: bun run build
-      - run: |
+      - name: Publish packages
+        run: |
           version="$GITHUB_REF_NAME"
 
           if [[ $version == *"beta"* ]]; then
@@ -39,8 +39,24 @@ jobs:
             tag=latest
           fi
 
-          # Bun doesn't support workspace publishing yet, so we use npm
-          npm publish --workspaces --access public --tag $tag --no-git-checks
-        # OIDC authentication is used automatically by npm CLI 11.5.1+
-        # No NPM_TOKEN secret needed - authentication happens via OpenID Connect
-        # See: https://docs.npmjs.com/trusted-publishers/
+          # Use bun pack to create tarballs (transforms workspace:^ to real versions)
+          # Then npm publish for OIDC authentication
+          for pkg in packages/wallets/*/; do
+            if [ -f "$pkg/package.json" ]; then
+              pkg_name=$(node -p "require('./$pkg/package.json').name")
+              echo "Checking if $pkg_name exists on npm..."
+
+              if npm view "$pkg_name" version &>/dev/null; then
+                echo "Publishing $pkg..."
+                (
+                  cd "$pkg"
+                  bun pm pack
+                  tarball=$(ls *.tgz)
+                  npm publish "$tarball" --access public --tag $tag
+                  rm -f "$tarball"
+                )
+              else
+                echo "⚠️  Skipping $pkg_name - package does not exist on npm. Create it first with: npm publish --access public"
+              fi
+            fi
+          done
