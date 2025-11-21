@@ -1,7 +1,7 @@
 {
   "name": "@wormhole-labs/wallet-aggregator-near",
   "repository": "https://github.com/wormholelabs-xyz/wallet-aggregator-sdk/tree/master/packages/wallets/near",
-  "version": "0.0.0-auto-managed",
+  "version": "1.3.3-beta.2",
   "sideEffects": false,
   "license": "MIT",
   "main": "dist/cjs/index.js",
