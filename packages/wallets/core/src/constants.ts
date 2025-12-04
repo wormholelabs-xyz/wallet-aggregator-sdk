@@ -42,6 +42,7 @@ export const CHAINS = {
   unichain: 44,
   worldchain: 45,
   monad: 48,
+  stacks: 60,
   wormchain: 3104,
   cosmoshub: 4000,
   evmos: 4001,
@@ -134,6 +135,7 @@ export const CHAIN_ID_HOLESKY = CHAINS["holesky"];
 export const CHAIN_ID_POLYGON_SEPOLIA = CHAINS["polygon_sepolia"];
 export const CHAIN_ID_UNICHAIN = CHAINS["unichain"];
 export const CHAIN_ID_MONAD = CHAINS["monad"];
+export const CHAIN_ID_STACKS = CHAINS["stacks"];
 
 export type Network = "MAINNET" | "TESTNET" | "DEVNET";
 
