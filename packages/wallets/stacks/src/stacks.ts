@@ -6,8 +6,10 @@ import {
   setSelectedProviderId,
   isConnected,
 } from "@stacks/connect";
-import type { ContractCallPayload, WbipProvider } from "@stacks/connect";
+import type { MethodResult, WbipProvider } from "@stacks/connect";
 import { getProviderFromId } from "@stacks/connect-ui";
+import { ContractCallOptions } from "@stacks/transactions";
+import { ClarityValue } from "@stacks/connect/dist/types/methods";
 import {
   BaseFeatures,
   CHAIN_ID_STACKS,
@@ -23,16 +25,21 @@ export interface StacksWalletConfig {
   network: "mainnet" | "testnet";
 }
 
-export type StacksContractCallInput = ContractCallPayload;
-
-export interface StacksTransactionResult {
-  txId: string;
-  txRaw?: string;
-}
-
-export class StacksWallet extends Wallet {
+export class StacksWallet extends Wallet<
+  typeof CHAIN_ID_STACKS,
+  void,
+  string,
+  MethodResult<"stx_signTransaction">,
+  never,
+  never,
+  ContractCallOptions,
+  MethodResult<"stx_callContract">,
+  string,
+  MethodResult<"stx_signMessage">,
+  StacksWalletConfig["network"]
+> {
   private provider: WbipProvider;
-  private network: "mainnet" | "testnet";
+  private network: StacksWalletConfig["network"];
   private walletProvider: any; // implementation-specific wallet provider
   private address?: string;
 
@@ -82,9 +89,7 @@ export class StacksWallet extends Wallet {
   }
 
   getNetworkInfo() {
-    return {
-      network: this.network,
-    };
+    return this.network;
   }
 
   async connect(): Promise<string[]> {
@@ -138,7 +143,9 @@ export class StacksWallet extends Wallet {
     this.emit("disconnect");
   }
 
-  async signTransaction(transaction: string) {
+  async signTransaction(
+    transaction: string
+  ): Promise<MethodResult<"stx_signTransaction">> {
     if (!this.isConnected()) {
       throw new NotConnected();
     }
@@ -158,15 +165,22 @@ export class StacksWallet extends Wallet {
   }
 
   async sendTransaction(): Promise<never> {
-    // TODO: @stacks/connect does not provide a way to send a signed transaction?
+    // @stacks/connect's `request` function does not provide a way to send a signed transaction
+    // Use the Stacks node RPC API to broadcast the signed transaction
     throw new NotSupported();
   }
 
   async signAndSendTransaction(
-    tx: StacksContractCallInput
-  ): Promise<SendTransactionResult<StacksTransactionResult>> {
+    options: ContractCallOptions
+  ): Promise<SendTransactionResult<MethodResult<"stx_callContract">>> {
     if (!this.isConnected()) {
       throw new NotConnected();
+    }
+
+    if (options.network && options.network !== this.network) {
+      throw new Error(
+        `Transaction network (${options.network}) does not match wallet network (${this.network})`
+      );
     }
 
     const result = await request(
@@ -175,25 +189,40 @@ export class StacksWallet extends Wallet {
       },
       "stx_callContract",
       {
-        contract: `${tx.contractAddress}.${tx.contractName}`,
-        functionName: tx.functionName,
-        functionArgs: tx.functionArgs,
+        contract: `${options.contractAddress}.${options.contractName}`,
+        functionName: options.functionName,
+        functionArgs: Array.isArray(options.functionArgs)
+          ? options.functionArgs.every((arg) => typeof arg === "string")
+            ? (options.functionArgs as string[])
+            : (options.functionArgs as ClarityValue[])
+          : options.functionArgs,
         network: this.network,
         address: this.address,
-        fee: tx.fee,
+        fee:
+          typeof options.fee === "string" || typeof options.fee === "number"
+            ? options.fee
+            : options.fee instanceof Uint8Array
+            ? BigInt("0x" + Buffer.from(options.fee).toString("hex")).toString()
+            : undefined,
+        postConditionMode: options.postConditionMode
+          ? options.postConditionMode === 1
+            ? "allow"
+            : "deny"
+          : undefined,
       }
     );
 
+    // Ensure txId has 0x prefix to match format returned
+    // by Stacks node RPC API and Hiro Stacks API
+    const txId = ensureHexPrefix(result.txid || "");
+
     return {
-      id: result.txid || "",
-      data: {
-        txId: result.txid || "",
-        txRaw: result.transaction,
-      },
+      id: txId,
+      data: result,
     };
   }
 
-  async signMessage(message: string): Promise<string> {
+  async signMessage(message: string): Promise<MethodResult<"stx_signMessage">> {
     if (!this.isConnected()) {
       throw new NotConnected();
     }
@@ -208,7 +237,7 @@ export class StacksWallet extends Wallet {
       }
     );
 
-    return result.signature;
+    return result;
   }
 
   getWalletState(): WalletState {
@@ -228,4 +257,8 @@ export class StacksWallet extends Wallet {
   supportsChain(chainId: number): boolean {
     return chainId === CHAIN_ID_STACKS;
   }
+}
+
+function ensureHexPrefix(txId: string): string {
+  return txId.startsWith("0x") ? txId : `0x${txId}`;
 }

@@ -41,6 +41,7 @@ minimumReleaseAgeExcludes = [
   "@wormhole-foundation/sdk-solana-tokenbridge",
   "@wormhole-foundation/sdk-stacks",
   "@wormhole-foundation/sdk-stacks-core",
+  "@wormhole-foundation/sdk-stacks-ntt",
   "@wormhole-foundation/sdk-sui",
   "@wormhole-foundation/sdk-sui-cctp",
   "@wormhole-foundation/sdk-sui-core",
