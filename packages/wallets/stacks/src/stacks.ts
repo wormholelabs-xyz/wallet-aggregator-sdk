@@ -9,6 +9,7 @@ import {
 import type { MethodResult, WbipProvider } from "@stacks/connect";
 import { getProviderFromId } from "@stacks/connect-ui";
 import { ContractCallOptions } from "@stacks/transactions";
+import { with0x } from "@stacks/common";
 import { ClarityValue } from "@stacks/connect/dist/types/methods";
 import {
   BaseFeatures,
@@ -94,7 +95,7 @@ export class StacksWallet extends Wallet<
 
   async connect(): Promise<string[]> {
     // Check if the wallet was previously connected.
-    // Avoid calling `getAddresses`, since that prompts the user for approval.
+    // Read addresses from local storage without prompting the user.
     if (isConnected()) {
       const selectedProviderId = getSelectedProviderId();
       if (selectedProviderId === this.provider.id) {
@@ -170,6 +171,44 @@ export class StacksWallet extends Wallet<
     throw new NotSupported();
   }
 
+  private formatFunctionArgs(args: ContractCallOptions["functionArgs"]) {
+    if (!Array.isArray(args)) {
+      return args;
+    }
+
+    if (args.every((arg) => typeof arg === "string")) {
+      return args as string[];
+    }
+
+    return args as ClarityValue[];
+  }
+
+  private formatFee(fee: ContractCallOptions["fee"]) {
+    if (typeof fee === "string" || typeof fee === "number") {
+      return fee;
+    }
+
+    if (fee instanceof Uint8Array) {
+      return BigInt("0x" + Buffer.from(fee).toString("hex")).toString();
+    }
+
+    return undefined;
+  }
+
+  private formatPostConditionMode(
+    mode: ContractCallOptions["postConditionMode"]
+  ) {
+    if (!mode) {
+      return undefined;
+    }
+
+    if (mode === 1) {
+      return "allow";
+    }
+
+    return "deny";
+  }
+
   async signAndSendTransaction(
     options: ContractCallOptions
   ): Promise<SendTransactionResult<MethodResult<"stx_callContract">>> {
@@ -191,30 +230,19 @@ export class StacksWallet extends Wallet<
       {
         contract: `${options.contractAddress}.${options.contractName}`,
         functionName: options.functionName,
-        functionArgs: Array.isArray(options.functionArgs)
-          ? options.functionArgs.every((arg) => typeof arg === "string")
-            ? (options.functionArgs as string[])
-            : (options.functionArgs as ClarityValue[])
-          : options.functionArgs,
+        functionArgs: this.formatFunctionArgs(options.functionArgs),
         network: this.network,
         address: this.address,
-        fee:
-          typeof options.fee === "string" || typeof options.fee === "number"
-            ? options.fee
-            : options.fee instanceof Uint8Array
-            ? BigInt("0x" + Buffer.from(options.fee).toString("hex")).toString()
-            : undefined,
-        postConditionMode: options.postConditionMode
-          ? options.postConditionMode === 1
-            ? "allow"
-            : "deny"
-          : undefined,
+        fee: this.formatFee(options.fee),
+        postConditionMode: this.formatPostConditionMode(
+          options.postConditionMode
+        ),
       }
     );
 
     // Ensure txId has 0x prefix to match format returned
     // by Stacks node RPC API and Hiro Stacks API
-    const txId = ensureHexPrefix(result.txid || "");
+    const txId = with0x(result.txid || "");
 
     return {
       id: txId,
@@ -257,8 +285,4 @@ export class StacksWallet extends Wallet<
   supportsChain(chainId: number): boolean {
     return chainId === CHAIN_ID_STACKS;
   }
-}
-
-function ensureHexPrefix(txId: string): string {
-  return txId.startsWith("0x") ? txId : `0x${txId}`;
 }
