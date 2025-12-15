@@ -226,6 +226,7 @@
       "name": "@wormhole-labs/wallet-aggregator-stacks",
       "version": "0.0.0-auto-managed",
       "dependencies": {
+        "@stacks/common": "^7.0.2",
         "@stacks/connect": "^8.2.3",
         "@stacks/connect-ui": "^8.1.1",
         "@stacks/transactions": "^7.2.0",
