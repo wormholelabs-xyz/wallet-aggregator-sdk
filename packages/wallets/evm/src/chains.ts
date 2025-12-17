@@ -333,10 +333,10 @@ export const MONAD = {
   nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
   rpcUrls: {
     default: {
-      http: ["https://rpc.monad.xyz"],
+      http: ["https://rpc3.monad.xyz"],
     },
     public: {
-      http: ["https://rpc.monad.xyz"],
+      http: ["https://rpc3.monad.xyz"],
     },
   },
   blockExplorers: {
