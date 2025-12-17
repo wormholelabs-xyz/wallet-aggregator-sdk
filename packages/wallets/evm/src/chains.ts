@@ -516,6 +516,27 @@ export const MOCA_TESTNET = {
   testnet: true,
 } as const satisfies Chain;
 
+export const MEGAETH = {
+  id: 4326,
+  name: "MegaETH",
+  nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://alpha.megaeth.com/rpc"],
+    },
+    public: {
+      http: ["https://alpha.megaeth.com/rpc"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "MEGA Explorer",
+      url: "https://megaeth-testnet-v3.blockscout.com",
+    },
+  },
+  testnet: false,
+} as const satisfies Chain;
+
 export const DEFAULT_CHAINS: readonly Chain[] = [
   ...Object.values(CHAINS),
   ACALA,
@@ -545,4 +566,5 @@ export const DEFAULT_CHAINS: readonly Chain[] = [
   PLUME,
   HYPER_EVM,
   MOCA_TESTNET,
+  MEGAETH,
 ] as const satisfies readonly Chain[];
