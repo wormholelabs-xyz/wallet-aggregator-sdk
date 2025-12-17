@@ -32,5 +32,6 @@ For more information, check each package README:
 | [@wormhole-labs/wallet-aggregator-injective](./packages/wallets/injective) | Wallet implementation for Injective                      |
 | [@wormhole-labs/wallet-aggregator-near](./packages/wallets/near)           | Wallet implementation for Near                           |
 | [@wormhole-labs/wallet-aggregator-solana](./packages/wallets/solana)       | Wallet implementation for Solana                         |
+| [@wormhole-labs/wallet-aggregator-stacks](./packages/wallets/stacks)       | Wallet implementation for Stacks                         |
 | [@wormhole-labs/wallet-aggregator-xpla](./packages/wallets/xpla)           | Wallet implementation for XPLA                           |
 | [@wormhole-labs/wallet-aggregator-terra](./packages/wallets/terra)         | Wallet implementation for Terra                          |

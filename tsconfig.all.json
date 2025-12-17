@@ -14,6 +14,7 @@
     { "path": "./packages/wallets/sei/tsconfig.json" },
     { "path": "./packages/wallets/cosmos/tsconfig.json" },
     { "path": "./packages/wallets/cosmos-evm/tsconfig.json" },
+    { "path": "./packages/wallets/stacks/tsconfig.json" },
     { "path": "./packages/react/tsconfig.json" }
   ]
 }
