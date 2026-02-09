@@ -43,6 +43,7 @@ export const CHAINS = {
   worldchain: 45,
   monad: 48,
   stacks: 60,
+  zerogravity: 67,
   wormchain: 3104,
   cosmoshub: 4000,
   evmos: 4001,
@@ -136,6 +137,7 @@ export const CHAIN_ID_POLYGON_SEPOLIA = CHAINS["polygon_sepolia"];
 export const CHAIN_ID_UNICHAIN = CHAINS["unichain"];
 export const CHAIN_ID_MONAD = CHAINS["monad"];
 export const CHAIN_ID_STACKS = CHAINS["stacks"];
+export const CHAIN_ID_ZEROGRAVITY = CHAINS["zerogravity"];
 
 export type Network = "MAINNET" | "TESTNET" | "DEVNET";
 
@@ -188,7 +190,8 @@ export function isEVMChain(chainId: ChainId): boolean {
     chainId === CHAIN_ID_XLAYER ||
     chainId === CHAIN_ID_MANTLE ||
     chainId === CHAIN_ID_UNICHAIN ||
-    chainId === CHAIN_ID_MONAD
+    chainId === CHAIN_ID_MONAD ||
+    chainId === CHAIN_ID_ZEROGRAVITY
   );
 }
 
