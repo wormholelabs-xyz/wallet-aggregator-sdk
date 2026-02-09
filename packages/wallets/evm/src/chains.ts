@@ -522,16 +522,16 @@ export const MEGAETH = {
   nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
-      http: ["https://alpha.megaeth.com/rpc"],
+      http: ["https://mainnet.megaeth.com/rpc"],
     },
     public: {
-      http: ["https://alpha.megaeth.com/rpc"],
+      http: ["https://mainnet.megaeth.com/rpc"],
     },
   },
   blockExplorers: {
     default: {
       name: "MEGA Explorer",
-      url: "https://megaeth-testnet-v3.blockscout.com",
+      url: "https://megaeth.blockscout.com",
     },
   },
   testnet: false,
