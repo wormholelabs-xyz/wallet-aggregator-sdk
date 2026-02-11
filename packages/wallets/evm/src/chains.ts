@@ -537,6 +537,48 @@ export const MEGAETH = {
   testnet: false,
 } as const satisfies Chain;
 
+export const ZEROGRAVITY = {
+  id: 16661,
+  name: "0G",
+  nativeCurrency: { name: "0G", symbol: "0G", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://evmrpc.0g.ai"],
+    },
+    public: {
+      http: ["https://evmrpc.0g.ai"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "0G Explorer",
+      url: "https://chainscan.0g.ai/",
+    },
+  },
+  testnet: false,
+} as const satisfies Chain;
+
+export const ZEROGRAVITY_TESTNET = {
+  id: 16602,
+  name: "0G Testnet",
+  nativeCurrency: { name: "0G", symbol: "0G", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://evmrpc-testnet.0g.ai"],
+    },
+    public: {
+      http: ["https://evmrpc-testnet.0g.ai"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "0G Explorer",
+      url: "https://chainscan-galileo.0g.ai/",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
 export const DEFAULT_CHAINS: readonly Chain[] = [
   ...Object.values(CHAINS),
   ACALA,
@@ -567,4 +609,6 @@ export const DEFAULT_CHAINS: readonly Chain[] = [
   HYPER_EVM,
   MOCA_TESTNET,
   MEGAETH,
+  ZEROGRAVITY,
+  ZEROGRAVITY_TESTNET,
 ] as const satisfies readonly Chain[];
