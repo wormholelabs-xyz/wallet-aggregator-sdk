@@ -564,10 +564,10 @@ export const ZEROGRAVITY_TESTNET = {
   nativeCurrency: { name: "0G", symbol: "0G", decimals: 18 },
   rpcUrls: {
     default: {
-      http: ["https://rpc.ankr.com/0g_galileo_testnet_evm"],
+      http: ["https://evmrpc-testnet.0g.ai"],
     },
     public: {
-      http: ["https://rpc.ankr.com/0g_galileo_testnet_evm"],
+      http: ["https://evmrpc-testnet.0g.ai"],
     },
   },
   blockExplorers: {
