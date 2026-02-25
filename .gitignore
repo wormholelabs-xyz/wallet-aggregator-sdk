@@ -3,3 +3,5 @@ dist
 yalc.lock
 .yalc
 .yalcrc
+.claude/settings.local.json
+*.tsbuildinfo

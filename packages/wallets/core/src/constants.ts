@@ -43,6 +43,7 @@ export const CHAINS = {
   worldchain: 45,
   monad: 48,
   stacks: 60,
+  xrpl: 66,
   zerogravity: 67,
   wormchain: 3104,
   cosmoshub: 4000,
@@ -138,6 +139,7 @@ export const CHAIN_ID_UNICHAIN = CHAINS["unichain"];
 export const CHAIN_ID_MONAD = CHAINS["monad"];
 export const CHAIN_ID_STACKS = CHAINS["stacks"];
 export const CHAIN_ID_ZEROGRAVITY = CHAINS["zerogravity"];
+export const CHAIN_ID_XRPL = CHAINS["xrpl"];
 
 export type Network = "MAINNET" | "TESTNET" | "DEVNET";
 
