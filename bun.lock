@@ -73,6 +73,18 @@
         "typescript": "^5.7.2",
       },
     },
+    "packages/wallets/btc": {
+      "name": "@wormhole-labs/wallet-aggregator-btc",
+      "version": "0.0.0-auto-managed",
+      "dependencies": {
+        "@wormhole-labs/wallet-aggregator-core": "workspace:^",
+      },
+      "devDependencies": {
+        "@types/node": "^18.19.69",
+        "shx": "^0.3.4",
+        "typescript": "^5.7.2",
+      },
+    },
     "packages/wallets/core": {
       "name": "@wormhole-labs/wallet-aggregator-core",
       "version": "0.0.0-auto-managed",
@@ -1302,6 +1314,8 @@
     "@wormhole-labs/wallet-aggregator-algorand": ["@wormhole-labs/wallet-aggregator-algorand@workspace:packages/wallets/algorand"],
 
     "@wormhole-labs/wallet-aggregator-aptos": ["@wormhole-labs/wallet-aggregator-aptos@workspace:packages/wallets/aptos"],
+
+    "@wormhole-labs/wallet-aggregator-btc": ["@wormhole-labs/wallet-aggregator-btc@workspace:packages/wallets/btc"],
 
     "@wormhole-labs/wallet-aggregator-core": ["@wormhole-labs/wallet-aggregator-core@workspace:packages/wallets/core"],
 
