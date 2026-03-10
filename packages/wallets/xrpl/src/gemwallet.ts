@@ -10,9 +10,16 @@ import {
   getNetwork,
   signTransaction as gemSignTransaction,
   submitTransaction,
+  sendPayment,
   signMessage as gemSignMessage,
   on,
+  type Amount,
+  type Memo as GemMemo,
+  type PaymentFlags,
+  type SendPaymentResponse,
+  type SubmitTransactionResponse,
 } from "@gemwallet/api";
+import type { Memo as XrplMemo } from "xrpl";
 import { XrplWallet } from "./xrpl";
 import { XrplFeatures, XrplTransaction, XrplWalletType } from "./types";
 
@@ -104,10 +111,39 @@ export class GemWalletXrpl extends XrplWallet {
   async signAndSendTransaction(
     tx: XrplTransaction
   ): Promise<SendTransactionResult<string>> {
-    const response = await submitTransaction({ transaction: tx });
+    let response: SendPaymentResponse | SubmitTransactionResponse;
+
+    // If it's a Payment transaction, we should use the optimized sendPayment method
+    if (tx.TransactionType === "Payment") {
+      // Convert XRPL native Memo format to GemWallet format
+      const xrplMemos = tx.Memos as XrplMemo[] | undefined;
+      const memos: GemMemo[] | undefined = xrplMemos?.map((m) => ({
+        memo: {
+          memoData: m.Memo.MemoData,
+          memoFormat: m.Memo.MemoFormat,
+          memoType: m.Memo.MemoType,
+        },
+      }));
+
+      response = await sendPayment({
+        amount: tx.Amount as Amount,
+        destination: tx.Destination as string,
+        destinationTag: tx.DestinationTag as number | undefined,
+        fee: tx.Fee as string | undefined,
+        flags: tx.Flags as PaymentFlags | undefined,
+        memos,
+        sendMax: tx.SendMax as Amount | undefined,
+        deliverMin: tx.DeliverMin as Amount | undefined,
+      });
+    } else {
+      // Fallback to generic sign and submit for non-Payment transactions
+      response = await submitTransaction({ transaction: tx });
+    }
+
     if (response.type === "reject" || !response.result) {
       throw new Error("User rejected transaction submission");
     }
+
     return { id: response.result.hash };
   }
 
