@@ -5,6 +5,7 @@ import {
 import type { SendTransactionResult } from "@wormhole-labs/wallet-aggregator-core";
 import { BtcWallet } from "./btc";
 import { OKX_ICON } from "./icons";
+import { assertTxid } from "./txid";
 import type { BtcFeatures, BtcPsbtTransaction } from "./types";
 import { BtcWalletType } from "./types";
 
@@ -64,7 +65,11 @@ export class OKXBtc extends BtcWallet {
       throw new Error("OKX wallet not detected");
     }
 
-    const txid = await provider.signPsbt(psbt, { autoFinalized: true });
-    return { id: txid };
+    // OKX's signPsbt returns the signed PSBT hex, NOT a txid.
+    // pushPsbt broadcasts the finalized PSBT and returns the actual txid.
+    const signedPsbt = await provider.signPsbt(psbt, { autoFinalized: true });
+    const txid = await provider.pushPsbt(signedPsbt);
+
+    return { id: assertTxid(txid, "OKX") };
   }
 }

@@ -4,6 +4,7 @@ export * from "./unisat";
 export * from "./phantom";
 export * from "./leather";
 export * from "./okx";
+export { assertTxid, isValidTxid } from "./txid";
 
 export type {
   BtcPsbtTransaction,
