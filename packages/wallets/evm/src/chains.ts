@@ -600,6 +600,26 @@ export const NEXUS_TESTNET = {
   testnet: true,
 } as const satisfies Chain;
 
+export const NEXUS = {
+  id: 3946,
+  name: "Nexus",
+  nativeCurrency: { name: "Nexus", symbol: "NEX", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://mainnet.rpc.nexus.xyz"],
+    },
+    public: {
+      http: ["https://mainnet.rpc.nexus.xyz"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Nexus Explorer",
+      url: "https://explorer.nexus.xyz/",
+    },
+  },
+} as const satisfies Chain;
+
 export const DEFAULT_CHAINS: readonly Chain[] = [
   ...Object.values(CHAINS),
   ACALA,
@@ -632,5 +652,6 @@ export const DEFAULT_CHAINS: readonly Chain[] = [
   MEGAETH,
   ZEROGRAVITY,
   ZEROGRAVITY_TESTNET,
+  NEXUS,
   NEXUS_TESTNET,
 ] as const satisfies readonly Chain[];

@@ -45,6 +45,7 @@ export const CHAINS = {
   stacks: 60,
   xrpl: 66,
   zerogravity: 67,
+  nexus: 69,
   wormchain: 3104,
   cosmoshub: 4000,
   evmos: 4001,
@@ -139,6 +140,7 @@ export const CHAIN_ID_UNICHAIN = CHAINS["unichain"];
 export const CHAIN_ID_MONAD = CHAINS["monad"];
 export const CHAIN_ID_STACKS = CHAINS["stacks"];
 export const CHAIN_ID_ZEROGRAVITY = CHAINS["zerogravity"];
+export const CHAIN_ID_NEXUS = CHAINS["nexus"];
 export const CHAIN_ID_XRPL = CHAINS["xrpl"];
 
 export type Network = "MAINNET" | "TESTNET" | "DEVNET";
@@ -193,7 +195,8 @@ export function isEVMChain(chainId: ChainId): boolean {
     chainId === CHAIN_ID_MANTLE ||
     chainId === CHAIN_ID_UNICHAIN ||
     chainId === CHAIN_ID_MONAD ||
-    chainId === CHAIN_ID_ZEROGRAVITY
+    chainId === CHAIN_ID_ZEROGRAVITY ||
+    chainId === CHAIN_ID_NEXUS
   );
 }
 
