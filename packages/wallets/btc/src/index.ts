@@ -17,16 +17,9 @@ export { BtcWalletType } from "./types";
 import { BtcWallet } from "./btc";
 import { XverseBtc } from "./xverse";
 import { UnisatBtc } from "./unisat";
-import { PhantomBtc } from "./phantom";
 import { LeatherBtc } from "./leather";
 import { OKXBtc } from "./okx";
 
 export const getSupportedWallets = (): BtcWallet[] => {
-  return [
-    new XverseBtc(),
-    new UnisatBtc(),
-    new PhantomBtc(),
-    new LeatherBtc(),
-    new OKXBtc(),
-  ];
+  return [new XverseBtc(), new UnisatBtc(), new LeatherBtc(), new OKXBtc()];
 };
