@@ -30,7 +30,11 @@ declare global {
     BitcoinProvider?: BitcoinJsonRpcProvider;
     unisat?: {
       requestAccounts(): Promise<string[]>;
-      signPsbt(psbt: string): Promise<string>;
+      signPsbt(
+        psbt: string,
+        options?: { autoFinalized?: boolean }
+      ): Promise<string>;
+      pushPsbt(psbt: string): Promise<string>;
     };
     phantom?: {
       bitcoin?: {
@@ -67,6 +71,7 @@ declare global {
           psbtHex: string,
           options?: { autoFinalized?: boolean }
         ): Promise<string>;
+        pushPsbt(psbtHex: string): Promise<string>;
       };
     };
   }

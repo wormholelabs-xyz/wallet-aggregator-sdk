@@ -17,6 +17,7 @@
     "build:esm": "tsc -p tsconfig.esm.json",
     "build": "shx rm -rf dist && npm run build:cjs && npm run build:esm",
     "clean": "shx rm -rf dist",
+    "test": "bun test",
     "prepublish": "npm run build"
   },
   "files": [
@@ -24,6 +25,7 @@
     "src/"
   ],
   "devDependencies": {
+    "@types/bun": "^1.3.13",
     "@types/node": "^18.19.69",
     "shx": "^0.3.4",
     "typescript": "^5.7.2"

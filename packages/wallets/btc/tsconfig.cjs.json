@@ -1,6 +1,7 @@
 {
   "extends": "../../../tsconfig.cjs.json",
   "include": ["src"],
+  "exclude": ["src/**/*.test.ts"],
   "compilerOptions": {
     "outDir": "./dist/cjs",
     "skipLibCheck": true

@@ -1,5 +1,5 @@
 import {
-  BaseFeatures,
+  NotSupported,
   WalletState,
 } from "@wormhole-labs/wallet-aggregator-core";
 import type { SendTransactionResult } from "@wormhole-labs/wallet-aggregator-core";
@@ -28,7 +28,9 @@ export class PhantomBtc extends BtcWallet {
   }
 
   getFeatures(): BtcFeatures[] {
-    return [BaseFeatures.SignAndSendTransaction];
+    // Phantom's Bitcoin provider can sign PSBTs but exposes no broadcast API,
+    // so it cannot sign-and-send. Callers must broadcast separately.
+    return [];
   }
 
   static getWalletType(): BtcWalletType {
@@ -65,24 +67,13 @@ export class PhantomBtc extends BtcWallet {
     // Phantom has no explicit disconnect API for Bitcoin
   }
 
+  // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars
   async signAndSendTransaction(
-    psbt: BtcPsbtTransaction
+    _psbt: BtcPsbtTransaction
   ): Promise<SendTransactionResult<string>> {
-    if (typeof window === "undefined" || !window.phantom?.bitcoin) {
-      throw new Error("Phantom wallet not detected");
-    }
-
-    const response = await window.phantom.bitcoin.signPSBT(psbt);
-
-    // Defensively handle JSON-RPC 2.0 response shape ({ result: ... })
-    const rpc = response as any;
-    if (rpc?.error) {
-      throw new Error(`Phantom signPSBT failed: ${JSON.stringify(rpc.error)}`);
-    }
-
-    const result = rpc?.result ?? response;
-    const id: string = result?.txid ?? result?.psbt ?? result;
-
-    return { id };
+    // Phantom's Bitcoin provider only signs PSBTs; it has no broadcast API.
+    // Returning the signed PSBT here would be a footgun — callers expect a
+    // real txid. Broadcast the signed PSBT through a separate path instead.
+    throw new NotSupported();
   }
 }

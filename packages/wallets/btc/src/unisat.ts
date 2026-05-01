@@ -5,6 +5,7 @@ import {
 import type { SendTransactionResult } from "@wormhole-labs/wallet-aggregator-core";
 import { BtcWallet } from "./btc";
 import { UNISAT_ICON } from "./icons";
+import { assertTxid } from "./txid";
 import type { BtcFeatures, BtcPsbtTransaction } from "./types";
 import { BtcWalletType } from "./types";
 
@@ -60,7 +61,13 @@ export class UnisatBtc extends BtcWallet {
       throw new Error("Unisat wallet not detected");
     }
 
-    const txid: string = await window.unisat.signPsbt(psbt);
-    return { id: txid };
+    // Unisat's signPsbt returns the signed PSBT hex, NOT a txid.
+    // pushPsbt broadcasts the finalized PSBT and returns the actual txid.
+    const signedPsbt = await window.unisat.signPsbt(psbt, {
+      autoFinalized: true,
+    });
+    const txid = await window.unisat.pushPsbt(signedPsbt);
+
+    return { id: assertTxid(txid, "Unisat") };
   }
 }

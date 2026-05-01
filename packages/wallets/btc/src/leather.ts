@@ -5,6 +5,7 @@ import {
 import type { SendTransactionResult } from "@wormhole-labs/wallet-aggregator-core";
 import { BtcWallet } from "./btc";
 import { LEATHER_ICON } from "./icons";
+import { assertTxid } from "./txid";
 import type { BtcFeatures, BtcPsbtTransaction } from "./types";
 import { BtcWalletType } from "./types";
 
@@ -88,7 +89,7 @@ export class LeatherBtc extends BtcWallet {
     }
 
     const result = rpc?.result ?? response;
-    const id: string = result?.txid ?? result?.hex ?? result;
+    const id = assertTxid(result?.txid, "Leather");
 
     return { id };
   }

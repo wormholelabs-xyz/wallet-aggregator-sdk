@@ -5,6 +5,7 @@ import {
 import type { SendTransactionResult } from "@wormhole-labs/wallet-aggregator-core";
 import { BtcWallet } from "./btc";
 import { XVERSE_ICON } from "./icons";
+import { assertTxid } from "./txid";
 import type {
   BtcFeatures,
   BtcPsbtTransaction,
@@ -18,7 +19,7 @@ function getProvider(): BitcoinJsonRpcProvider | undefined {
     window.BitcoinProvider &&
     "request" in window.BitcoinProvider
   ) {
-    return window.BitcoinProvider as BitcoinJsonRpcProvider;
+    return window.BitcoinProvider;
   }
 }
 
@@ -95,12 +96,12 @@ export class XverseBtc extends BtcWallet {
     });
 
     const rpc = response as any;
-    if (rpc.error) {
+    if (rpc?.error) {
       throw new Error(`Xverse signPsbt failed: ${JSON.stringify(rpc.error)}`);
     }
 
-    const result = rpc.result ?? response.result;
-    const id: string = result?.txid ?? result?.psbt ?? result;
+    const result = rpc?.result ?? response;
+    const id = assertTxid(result?.txid, "Xverse");
 
     return { id };
   }
