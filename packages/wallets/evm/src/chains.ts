@@ -579,6 +579,47 @@ export const ZEROGRAVITY_TESTNET = {
   testnet: true,
 } as const satisfies Chain;
 
+export const TEMPO_TESTNET = {
+  id: 42431,
+  name: "Tempo",
+  nativeCurrency: { name: "pathUSD", symbol: "pathUSD", decimals: 6 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.moderato.tempo.xyz"],
+    },
+    public: {
+      http: ["https://rpc.moderato.tempo.xyz"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Tempo Explorer",
+      url: "https://explore.moderato.tempo.xyz/",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
+export const TEMPO = {
+  id: 4217,
+  name: "Tempo",
+  nativeCurrency: { name: "pathUSD", symbol: "pathUSD", decimals: 6 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.mainnet.tempo.xyz"],
+    },
+    public: {
+      http: ["https://rpc.mainnet.tempo.xyz"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Tempo Explorer",
+      url: "https://explore.tempo.xyz",
+    },
+  },
+} as const satisfies Chain;
+
 export const NEXUS_TESTNET = {
   id: 3945,
   name: "Nexus Testnet",
@@ -654,4 +695,6 @@ export const DEFAULT_CHAINS: readonly Chain[] = [
   ZEROGRAVITY_TESTNET,
   NEXUS,
   NEXUS_TESTNET,
+  TEMPO,
+  TEMPO_TESTNET,
 ] as const satisfies readonly Chain[];
