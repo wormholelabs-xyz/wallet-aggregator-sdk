@@ -579,6 +579,27 @@ export const ZEROGRAVITY_TESTNET = {
   testnet: true,
 } as const satisfies Chain;
 
+export const ARC_TESTNET = {
+  id: 5042002,
+  name: "Arc",
+  nativeCurrency: { name: "USD Coin", symbol: "USDC", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.testnet.arc.network"],
+    },
+    public: {
+      http: ["https://rpc.testnet.arc.network"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Arc Testnet Explorer",
+      url: "https://testnet.arcscan.app",
+    },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
 export const TEMPO_TESTNET = {
   id: 42431,
   name: "Tempo",
@@ -697,4 +718,5 @@ export const DEFAULT_CHAINS: readonly Chain[] = [
   NEXUS_TESTNET,
   TEMPO,
   TEMPO_TESTNET,
+  ARC_TESTNET,
 ] as const satisfies readonly Chain[];

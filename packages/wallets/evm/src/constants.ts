@@ -32,6 +32,7 @@ export const EVM_CHAINS = {
   zerogravity: 16661,
   nexus: 3946,
   tempo: 4217,
+  arc: 5042,
 } as const;
 
 export const EVM_CHAINS_TESTNET = {
@@ -61,6 +62,7 @@ export const EVM_CHAINS_TESTNET = {
   zerogravity: 16602,
   nexus: 3945,
   tempo: 42431,
+  arc: 5042002,
 } as const;
 
 export type EVMChainName =
@@ -90,7 +92,8 @@ export type EVMChainName =
   | "monad"
   | "zerogravity"
   | "nexus"
-  | "tempo";
+  | "tempo"
+  | "arc";
 
 type Indexable = string | number | symbol;
 
