@@ -1,21 +1,17 @@
-import {
-  Connection,
-  ExecuteTransactionRequestType,
-  JsonRpcProvider,
-  SuiTransactionBlockResponseOptions,
-  TransactionBlock,
-} from "@mysten/sui.js";
+import { SuiGrpcClient } from "@mysten/sui/grpc";
+import { Transaction } from "@mysten/sui/transactions";
+import { fromBase64 } from "@mysten/sui/utils";
 import {
   StandardConnectMethod,
   StandardDisconnectMethod,
   Wallet as StandardWallet,
-  SuiSignAndExecuteTransactionBlockMethod,
-  SuiSignAndExecuteTransactionBlockOutput,
+  SignedTransaction,
+  SuiSignAndExecuteTransactionMethod,
+  SuiSignAndExecuteTransactionOutput,
   SuiSignMessageInput,
   SuiSignMessageMethod,
   SuiSignMessageOutput,
-  SuiSignTransactionBlockMethod,
-  SuiSignTransactionBlockOutput,
+  SuiSignTransactionMethod,
   WalletAccount,
 } from "@mysten/wallet-standard";
 import {
@@ -26,7 +22,6 @@ import {
   NotSupported,
   SendTransactionResult,
   Wallet,
-  WalletEvents,
 } from "@wormhole-labs/wallet-aggregator-core";
 import { DEFAULTS, SuiWalletName, WalletInfo } from "./walletsInfo";
 
@@ -34,24 +29,22 @@ export enum FeatureName {
   STANDARD__CONNECT = "standard:connect",
   STANDARD__DISCONNECT = "standard:disconnect",
   STANDARD__EVENTS = "standard:events",
-  SUI__SIGN_AND_EXECUTE_TRANSACTION_BLOCK = "sui:signAndExecuteTransactionBlock",
-  SUI__SIGN_TRANSACTION_BLOCK = "sui:signTransactionBlock",
+  SUI__SIGN_AND_EXECUTE_TRANSACTION = "sui:signAndExecuteTransaction",
+  SUI__SIGN_TRANSACTION = "sui:signTransaction",
   SUI__SIGN_MESSAGE = "sui:signMessage",
 }
 
 interface SignAndSendTransactionOptions {
-  transactionBlock: TransactionBlock;
-  requestType?: ExecuteTransactionRequestType;
-  options?: SuiTransactionBlockResponseOptions;
+  transaction: Transaction;
 }
 
 type ConnectFeature = { connect: StandardConnectMethod };
 type DisconnectFeature = { disconnect: StandardDisconnectMethod };
-type SignAndExecuteTransactionBlockFeature = {
-  signAndExecuteTransactionBlock: SuiSignAndExecuteTransactionBlockMethod;
+type SignAndExecuteTransactionFeature = {
+  signAndExecuteTransaction: SuiSignAndExecuteTransactionMethod;
 };
-type SignTransactionBlockFeature = {
-  signTransactionBlock: SuiSignTransactionBlockMethod;
+type SignTransactionFeature = {
+  signTransaction: SuiSignTransactionMethod;
 };
 type SignMessageFeature = { signMessage: SuiSignMessageMethod };
 type SuiNetworkInfo = {
@@ -63,12 +56,12 @@ const DO_NOT_REMOVE_WALLET_FROM = ["OKX", "Bitget"] as const;
 export class SuiWallet extends Wallet<
   typeof CHAIN_ID_SUI,
   void,
-  TransactionBlock,
-  SuiSignTransactionBlockOutput,
-  SuiSignTransactionBlockOutput,
-  SuiSignAndExecuteTransactionBlockOutput,
+  Transaction,
+  SignedTransaction,
+  SignedTransaction,
+  SuiSignAndExecuteTransactionOutput,
   SignAndSendTransactionOptions,
-  SuiSignAndExecuteTransactionBlockOutput,
+  SuiSignAndExecuteTransactionOutput,
   SuiSignMessageInput,
   SuiSignMessageOutput,
   SuiNetworkInfo,
@@ -80,7 +73,10 @@ export class SuiWallet extends Wallet<
 
   constructor(
     private readonly wallet: StandardWallet,
-    private readonly connection?: Connection
+    // v2 Sui gRPC client, used to submit a separately-signed transaction
+    // (sendTransaction). Optional: wallets using signAndSendTransaction
+    // submit via the wallet itself and don't need it.
+    private readonly client?: SuiGrpcClient
   ) {
     super();
     if (DO_NOT_REMOVE_WALLET_FROM.find((name) => wallet.name.includes(name))) {
@@ -120,52 +116,50 @@ export class SuiWallet extends Wallet<
     this.emit("disconnect");
   }
 
-  signTransaction(
-    transactionBlock: TransactionBlock
-  ): Promise<SuiSignTransactionBlockOutput> {
+  signTransaction(transaction: Transaction): Promise<SignedTransaction> {
     if (!this.activeAccount) throw new NotConnected();
 
-    const { signTransactionBlock } =
-      this.getFeature<SignTransactionBlockFeature>(
-        FeatureName.SUI__SIGN_TRANSACTION_BLOCK
-      );
+    const { signTransaction } = this.getFeature<SignTransactionFeature>(
+      FeatureName.SUI__SIGN_TRANSACTION
+    );
 
-    return signTransactionBlock({
-      transactionBlock,
+    return signTransaction({
+      transaction,
       account: this.activeAccount,
       chain: this.activeAccount.chains[0],
     });
   }
 
   async sendTransaction(
-    tx: SuiSignTransactionBlockOutput
-  ): Promise<SendTransactionResult<SuiSignAndExecuteTransactionBlockOutput>> {
-    if (!this.connection) throw new Error("Connection not provided");
-    const provider = new JsonRpcProvider(this.connection);
+    tx: SignedTransaction
+  ): Promise<SendTransactionResult<SuiSignAndExecuteTransactionOutput>> {
+    if (!this.client) throw new Error("Sui client not provided");
 
-    const result = await provider.executeTransactionBlock({
-      signature: tx.signature,
-      transactionBlock: tx.transactionBlockBytes,
+    const result = await this.client.executeTransaction({
+      transaction: fromBase64(tx.bytes),
+      signatures: [tx.signature],
     });
 
+    const executed = result.Transaction ?? result.FailedTransaction;
+
     return {
-      id: result.digest,
-      data: result,
+      id: executed!.digest,
+      data: result as unknown as SuiSignAndExecuteTransactionOutput,
     };
   }
 
   async signAndSendTransaction(
     options: SignAndSendTransactionOptions
-  ): Promise<SendTransactionResult<SuiSignAndExecuteTransactionBlockOutput>> {
+  ): Promise<SendTransactionResult<SuiSignAndExecuteTransactionOutput>> {
     if (!this.activeAccount) throw new NotConnected();
 
-    const { signAndExecuteTransactionBlock } =
-      this.getFeature<SignAndExecuteTransactionBlockFeature>(
-        FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION_BLOCK
+    const { signAndExecuteTransaction } =
+      this.getFeature<SignAndExecuteTransactionFeature>(
+        FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION
       );
 
-    const result = await signAndExecuteTransactionBlock({
-      ...options,
+    const result = await signAndExecuteTransaction({
+      transaction: options.transaction,
       account: this.activeAccount,
       chain: this.activeAccount.chains[0],
     });
@@ -238,12 +232,10 @@ export class SuiWallet extends Wallet<
 
   getFeatures(): BaseFeatures[] {
     const features = [BaseFeatures.SendTransaction];
-    if (this.wallet.features[FeatureName.SUI__SIGN_TRANSACTION_BLOCK]) {
+    if (this.wallet.features[FeatureName.SUI__SIGN_TRANSACTION]) {
       features.push(BaseFeatures.SignTransaction);
     }
-    if (
-      this.wallet.features[FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION_BLOCK]
-    ) {
+    if (this.wallet.features[FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION]) {
       features.push(BaseFeatures.SignAndSendTransaction);
     }
     if (this.wallet.features[FeatureName.SUI__SIGN_MESSAGE]) {
