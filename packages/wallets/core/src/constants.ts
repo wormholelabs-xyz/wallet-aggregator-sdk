@@ -48,6 +48,7 @@ export const CHAINS = {
   tempo: 68,
   nexus: 69,
   arc: 71,
+  hydration: 73,
   wormchain: 3104,
   cosmoshub: 4000,
   evmos: 4001,
@@ -145,6 +146,7 @@ export const CHAIN_ID_ZEROGRAVITY = CHAINS["zerogravity"];
 export const CHAIN_ID_TEMPO = CHAINS["tempo"];
 export const CHAIN_ID_NEXUS = CHAINS["nexus"];
 export const CHAIN_ID_ARC = CHAINS["arc"];
+export const CHAIN_ID_HYDRATION = CHAINS["hydration"];
 export const CHAIN_ID_XRPL = CHAINS["xrpl"];
 
 export type Network = "MAINNET" | "TESTNET" | "DEVNET";
