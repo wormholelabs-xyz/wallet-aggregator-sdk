@@ -620,6 +620,26 @@ export const ARC_TESTNET = {
   testnet: true,
 } as const satisfies Chain;
 
+export const HYDRATION = {
+  id: 222222,
+  name: "Hydration",
+  nativeCurrency: { name: "Wrapped Ether", symbol: "WETH", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.coke.hydration.cloud"],
+    },
+    public: {
+      http: ["https://rpc.coke.hydration.cloud"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Hydration Explorer",
+      url: "https://hydration.subscan.io",
+    },
+  },
+} as const satisfies Chain;
+
 export const TEMPO_TESTNET = {
   id: 42431,
   name: "Tempo",
@@ -740,4 +760,5 @@ export const DEFAULT_CHAINS: readonly Chain[] = [
   TEMPO_TESTNET,
   ARC,
   ARC_TESTNET,
+  HYDRATION,
 ] as const satisfies readonly Chain[];
